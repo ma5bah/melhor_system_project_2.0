@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="960.0" style="-fx-background-color: transparent;" stylesheets="@../../../styles/welcome.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lab.melhor.WelcomeController">
+   <children>
+      <Label layoutX="30.0" layoutY="121.0" prefHeight="64.0" prefWidth="225.0" text="Welcome to Inventory " textFill="YELLOW">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Label layoutX="30.0" layoutY="171.0" prefHeight="64.0" prefWidth="225.0" text="Management System" textFill="YELLOW">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <JFXButton cancelButton="true" defaultButton="true" layoutX="514.0" layoutY="91.0" pickOnBounds="false" prefHeight="25.0" prefWidth="25.0" ripplerFill="#ffffff00" rotate="45.0" style="-fx-background-color: transparent;" text="   " />
+      <JFXButton fx:id="customerLoginBtn" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="75.0" layoutY="230.0" onAction="#start_here" prefHeight="18.0" prefWidth="136.0" ripplerFill="#808080bd" styleClass="customerLoginBtn" stylesheets="@../../../styles/button_hover.css" text="Start here" />
+      <MenuBar prefHeight="25.0" prefWidth="960.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="File">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Close" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Edit">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Delete" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#show_about" text="About" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+   </children>
+</AnchorPane>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="600.0" prefWidth="960.0" style="-fx-background-color: #7FB3D5;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lab.melhor.loginController">
+   <children>
+      <AnchorPane fx:id="login_pane" layoutX="475.0" layoutY="63.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#login_on_mouse_clicked" prefHeight="390.0" prefWidth="300.0" style="-fx-background-color: #154360;">
+         <children>
+            <TextField alignment="CENTER" layoutX="30.0" layoutY="109.0" prefHeight="39.0" prefWidth="240.0" promptText="USERNAME" />
+            <Text layoutX="117.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign in">
+               <font>
+                  <Font name="SansSerif Bold" size="20.0" />
+               </font>
+            </Text>
+            <TextField alignment="CENTER" layoutX="30.0" layoutY="176.0" prefHeight="39.0" prefWidth="240.0" promptText="PASSWORD" />
+            <CheckBox layoutX="30.0" layoutY="231.0" mnemonicParsing="false" text="Remember Me" />
+            <JFXButton layoutX="30.0" layoutY="278.0" onAction="#login_button_clicked" prefHeight="25.0" prefWidth="240.0" style="-fx-background-color: #568EFF;" text="Login">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="register_pane" layoutX="185.0" layoutY="28.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#register_on_mouse_clicked" prefHeight="460.0" prefWidth="300.0" style="-fx-background-color: #154360;">
+         <children>
+            <TextField alignment="CENTER" layoutX="29.0" layoutY="91.0" onAction="#abc" prefHeight="39.0" prefWidth="240.0" promptText="NAME" />
+            <Text layoutX="117.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign Up">
+               <font>
+                  <Font name="SansSerif Bold" size="20.0" />
+               </font>
+            </Text>
+            <TextField alignment="CENTER" layoutX="30.0" layoutY="286.0" prefHeight="39.0" prefWidth="240.0" promptText="PASSWORD" />
+            <CheckBox layoutX="30.0" layoutY="339.0" mnemonicParsing="false" style="-fx-text-fill: #000000;" text="By checking this box, you are agreeing" />
+            <JFXButton layoutX="35.0" layoutY="390.0" onAction="#registration_button_clicked" prefHeight="25.0" prefWidth="240.0" style="-fx-background-color: #568EFF;" text="Sign Up">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </JFXButton>
+            <Text layoutX="55.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" text="to our terms of service." />
+            <TextField alignment="CENTER" layoutX="30.0" layoutY="152.0" prefHeight="39.0" prefWidth="240.0" promptText="USERNAME" />
+            <TextField alignment="CENTER" layoutX="30.0" layoutY="222.0" prefHeight="39.0" prefWidth="240.0" promptText="EMAIL" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
