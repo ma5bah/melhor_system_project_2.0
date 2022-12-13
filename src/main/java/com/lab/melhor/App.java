@@ -1,18 +1,17 @@
 package com.lab.melhor;
 
 import BackEnd.db;
-import access_management.login_registration;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.ResourceBundle;
 
-import javafx.stage.Modality;
 
 /**
  * JavaFX App
@@ -20,18 +19,21 @@ import javafx.stage.Modality;
 public class App extends Application {
 
     private static Scene scene;
+    AnchorPane main_window;
     // public static login_registration state;
 
     @Override
     public void start(Stage stage) throws IOException {
 
         scene = new Scene(loadFXML("welcome"));
+        
         stage.setScene(scene);
         stage.show();
     }
 
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
+        
     }
 
     static Scene get_login_window() throws IOException {
@@ -61,11 +63,11 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        db.getConnections();
-        db.set_product_data();
-        db.get_product_data();
+        // db.getConnections();
+        // db.set_product_data();
+//        db.get_product_data();
         // state = new login_registration();
-        // launch();
+         launch();
     }
 
 }

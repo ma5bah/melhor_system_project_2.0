@@ -14,10 +14,10 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.util.Date;
 
 public class db {
-
-    public static final String DB_NAME = "test";
+    public static final String URL="jdbc:mysql://192.168.0.107:3306/";
+    public static final String DB_NAME = "melhor";
     public static final String USERNAME = "root";
-    public static final String PASSWORD = "";
+    public static final String PASSWORD = "password";
 
     public static Connection source = null;
 
@@ -27,7 +27,7 @@ public class db {
         }
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            source = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + DB_NAME, USERNAME, PASSWORD);
+            source = DriverManager.getConnection(URL + DB_NAME, USERNAME, PASSWORD);
             return source;
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
@@ -58,6 +58,8 @@ public class db {
         try {
             if (source == null)
                 getConnections();
+            if (source == null)
+                return;
             Statement s = source.createStatement();
             ResultSet res = s.executeQuery("SELECT * FROM `product`");
             System.out.println(res.getRow());
