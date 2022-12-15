@@ -25,7 +25,7 @@ public class dashboard_controller implements Initializable {
     @FXML
     private AnchorPane root_anchor_pane;
     @FXML
-    private StackPane   main_stack_pane;
+    private StackPane main_stack_pane;
     @FXML
     private VBox pnItems = null;
     @FXML
@@ -49,58 +49,57 @@ public class dashboard_controller implements Initializable {
     @FXML
     private Button btnSignout;
 
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
             Pane new_panal = new FXMLLoader(getClass().getResource("overview_dashboard.fxml")).load();
             main_stack_pane.getChildren().addAll(new_panal);
+
         } catch (IOException e) {
-              e.printStackTrace();
+            e.printStackTrace();
         }
-        
-//        Node[] nodes = new Node[10];
-//        for (int i = 0; i < nodes.length; i++) {
-//            try {
-//
-//                final int j = i;
-//                nodes[i] = FXMLLoader.load(getClass().getResource("Item.fxml"));
-//
-//                // give the items some effect
-//
-//                nodes[i].setOnMouseEntered(event -> {
-//                    nodes[j].setStyle("-fx-background-color : #0A0E3F");
-//                });
-//                nodes[i].setOnMouseExited(event -> {
-//                    nodes[j].setStyle("-fx-background-color : #02030A");
-//                });
-//                pnItems.getChildren().add(nodes[i]);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
+
+        // Node[] nodes = new Node[10];
+        // for (int i = 0; i < nodes.length; i++) {
+        // try {
+        //
+        // final int j = i;
+        // nodes[i] = FXMLLoader.load(getClass().getResource("Item.fxml"));
+        //
+        // // give the items some effect
+        //
+        // nodes[i].setOnMouseEntered(event -> {
+        // nodes[j].setStyle("-fx-background-color : #0A0E3F");
+        // });
+        // nodes[i].setOnMouseExited(event -> {
+        // nodes[j].setStyle("-fx-background-color : #02030A");
+        // });
+        // pnItems.getChildren().add(nodes[i]);
+        // } catch (IOException e) {
+        // e.printStackTrace();
+        // }
+        // }
 
     }
 
     public void handleClicks(ActionEvent actionEvent) throws IOException {
         if (actionEvent.getSource() == btnCustomers) {
-//            pnlCustomer.setStyle("-fx-background-color : #1620A1");
-//            pnlCustomer.toFront();
+            // pnlCustomer.setStyle("-fx-background-color : #1620A1");
+            // pnlCustomer.toFront();
         }
         if (actionEvent.getSource() == btnMenus) {
-//            pnlMenus.setStyle("-fx-background-color : #53639F");
-//            pnlMenus.toFront();
+            // pnlMenus.setStyle("-fx-background-color : #53639F");
+            // pnlMenus.toFront();
         }
         if (actionEvent.getSource() == btnOverview) {
-//            pnlOverview.setStyle("-fx-background-color : #02030A");
-//            pnlOverview.toFront();
+            // pnlOverview.setStyle("-fx-background-color : #02030A");
+            // pnlOverview.toFront();
         }
         if (actionEvent.getSource() == btnOrders) {
             // root_anchor_pane.getChildren().removeAll();
             // root_anchor_pane.getChildren().remove(main_stack_pane.getChildren());
-//            main_stack_pane.getChildren().remove(pnlOverview);
-            Pane new_panal=new FXMLLoader(getClass().getResource("detail.fxml")).load();
+            // main_stack_pane.getChildren().remove(pnlOverview);
+            Pane new_panal = new FXMLLoader(getClass().getResource("detail.fxml")).load();
             // Scene new_pnl=new Scene(new_panal);
             main_stack_pane.getChildren().addAll(new_panal);
             System.out.println("null");

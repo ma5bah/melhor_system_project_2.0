@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.util.Enumeration;
 import java.util.ResourceBundle;
 
-
 /**
  * JavaFX App
  */
@@ -26,14 +25,23 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
 
         scene = new Scene(loadFXML("welcome"));
-        
         stage.setScene(scene);
         stage.show();
     }
 
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
-        
+    }
+
+    static void slide_from_right_side(Parent root_panal,String fxml) throws IOException {
+        // Parent slide_show_panal = loadFXML(fxml);
+        // root_panal.getChildre
+        // AnchorPane container = new AnchorPane();
+        // slide_show_panal.setLayoutX(960);
+        // container.getChildren().addAll(scene.getRoot(), slide_show_panal);
+        // scene.setRoot(container);
+        // System.out.println(scene.getRoot().getScene());
+
     }
 
     static Scene get_login_window() throws IOException {
@@ -65,9 +73,9 @@ public class App extends Application {
     public static void main(String[] args) {
         // db.getConnections();
         // db.set_product_data();
-//        db.get_product_data();
+        // db.get_product_data();
         // state = new login_registration();
-         launch();
+        launch();
     }
 
 }

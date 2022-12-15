@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="960.0" style="-fx-background-color: #7FB3D5;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lab.melhor.loginController">
+<AnchorPane prefHeight="600.0" prefWidth="960.0" style="-fx-background-color: #7FB3D5;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lab.melhor.login_registration_controller">
    <children>
       <AnchorPane fx:id="login_pane" layoutX="475.0" layoutY="100.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#login_on_mouse_clicked" prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: #154360;">
          <children>

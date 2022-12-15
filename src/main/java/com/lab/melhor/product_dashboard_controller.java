@@ -1,12 +1,13 @@
 package com.lab.melhor;
 
+
 import javafx.fxml.Initializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class item_dashboard_controller implements Initializable {
+public class product_dashboard_controller implements Initializable {
 
     @FXML
     private Label item_name;

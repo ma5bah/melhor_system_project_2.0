@@ -10,22 +10,24 @@ import javafx.fxml.Initializable;
 import BackEnd.CommonTask;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
-public class WelcomeController implements Initializable{
+
+public class WelcomeController implements Initializable {
     @FXML
     private AnchorPane main_pane;
 
-
     @FXML
     private void start_here() throws IOException {
-        App.setRoot("login");
+        App.setRoot("login_registration");
     }
+
     @FXML
-    private void show_about()throws IOException{
-        CommonTask.showAlert(Alert.AlertType.INFORMATION, "About us", "This app is developed for managing inventory smoothly.\nSamin and masbah made this application.");
+    private void show_about() throws IOException {
+        CommonTask.showAlert(Alert.AlertType.INFORMATION, "About us",
+                "This app is developed for managing inventory smoothly.\nSamin and masbah made this application.");
     }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        
-        
+
     }
 }
