@@ -6,15 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.util.Date;
 
 public class db {
-    public static final String URL="jdbc:mysql://192.168.0.107:3306/";
+    public static final String URL = "jdbc:mysql://192.168.0.107:3306/";
     public static final String DB_NAME = "melhor";
     public static final String USERNAME = "root";
     public static final String PASSWORD = "password";
