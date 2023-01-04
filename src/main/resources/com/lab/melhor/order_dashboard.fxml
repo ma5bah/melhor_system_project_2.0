@@ -10,83 +10,53 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane prefHeight="576.0" prefWidth="790.0" style="-fx-background-color: #02030A;" stylesheets="@../../../styles/dashboard.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lab.melhor.overview_dashboard">
+<StackPane prefHeight="576.0" prefWidth="790.0" style="-fx-background-color: #02030A;" stylesheets="@../../../styles/dashboard.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lab.melhor.order_dashboard_controller">
    <children>
       <Pane fx:id="pnlOverview" prefHeight="554.0" prefWidth="793.0">
          <children>
             <TextField layoutX="590.0" layoutY="47.0" prefHeight="27.0" prefWidth="183.0" promptText="search" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
-            <Label layoutX="57.0" layoutY="25.0" text="Overview" textFill="#e7e5e5">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <HBox alignment="CENTER_LEFT" layoutX="45.0" layoutY="72.0" prefHeight="92.0" prefWidth="661.0" spacing="50.0">
+            <HBox alignment="CENTER_LEFT" layoutX="71.0" layoutY="74.0" prefHeight="92.0" prefWidth="661.0" spacing="50.0">
                <children>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                  <VBox alignment="CENTER" prefHeight="92.0" prefWidth="209.0">
                      <children>
-                        <Label text="22000" textFill="#2a73ff">
+                        <Label onMouseClicked="#get_all_order" text="Orders" textFill="#7fb3d5">
                            <font>
                               <Font name="System Bold" size="26.0" />
                            </font>
                         </Label>
-                        <Label text="Total Orders" textFill="#e7e5e5" />
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                  <VBox alignment="CENTER" prefHeight="92.0" prefWidth="326.0" />
+                  <VBox alignment="CENTER" onMouseClicked="#get_generated_order" prefHeight="92.0" prefWidth="295.0">
                      <children>
-                        <Label text="1500" textFill="#26bfbc">
+                        <Label prefHeight="38.0" prefWidth="358.0" text="Generated Order" textFill="#7fb3d5">
                            <font>
                               <Font name="System Bold" size="26.0" />
                            </font>
                         </Label>
-                        <Label text="Total delivered" textFill="#e7e5e5" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label text="1000" textFill="#fa5f7e">
-                           <font>
-                              <Font name="System Bold" size="26.0" />
-                           </font>
-                        </Label>
-                        <Label text="Peding Orders" textFill="#e7e5e5" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label text="780" textFill="#de0000">
-                           <font>
-                              <Font name="System Bold" size="26.0" />
-                           </font>
-                        </Label>
-                        <Label text="Orders on Hold" textFill="#e7e5e5" />
                      </children>
                   </VBox>
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" layoutX="45.0" layoutY="178.0" prefHeight="42.0" prefWidth="712.0" spacing="80.0" style="-fx-background-color: #02030A;">
                <children>
-                  <Label text="Product Name" textFill="#e7e5e5">
+                  <Label text="ID" textFill="#e7e5e5">
                      <HBox.margin>
                         <Insets left="50.0" />
                      </HBox.margin>
                   </Label>
-                  <Label text="Owner" textFill="#e7e5e5">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Label>
-                  <Label text="Delivery Date" textFill="#e7e5e5">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Label>
-                  <Label text="Amount" textFill="#e7e5e5">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Label>
                   <Label text="Status" textFill="#e7e5e5">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+                  <Label layoutX="409.0" layoutY="23.0" text="Type" textFill="#e7e5e5" />
+                  <Label text="Responsible" textFill="#e7e5e5">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+                  <Label text="Total Amount" textFill="#e7e5e5">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>

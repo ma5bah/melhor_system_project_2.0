@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="melhor" />
+        <module name="melhor_system_project_2.0" />
       </profile>
     </annotationProcessing>
   </component>

@@ -21,25 +21,25 @@
          </font>
       </Label>
       <JFXButton cancelButton="true" defaultButton="true" layoutX="514.0" layoutY="91.0" pickOnBounds="false" prefHeight="25.0" prefWidth="25.0" ripplerFill="#ffffff00" rotate="45.0" style="-fx-background-color: transparent;" text="   " />
-      <JFXButton fx:id="customerLoginBtn" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="75.0" layoutY="230.0" onAction="#start_here" prefHeight="18.0" prefWidth="136.0" ripplerFill="#808080bd" styleClass="customerLoginBtn" stylesheets="@../../../styles/button_hover.css" text="Start here" />
+      <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="75.0" layoutY="230.0" onAction="#login" prefHeight="18.0" prefWidth="136.0" ripplerFill="#808080bd" styleClass="customerLoginBtn" stylesheets="@../../../styles/button_hover.css" text="Login" />
       <MenuBar prefHeight="25.0" prefWidth="960.0">
          <menus>
-            <Menu mnemonicParsing="false" text="File">
+            <Menu mnemonicParsing="false" text="Options">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Close" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Edit">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Delete" />
+                  <MenuItem mnemonicParsing="false" text="sign up" />
+                  <MenuItem mnemonicParsing="false" text="login" />
+                  <MenuItem mnemonicParsing="false" onAction="#show_terms" text="Terms and Policies" />
+                  <MenuItem mnemonicParsing="false" text="exit" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Help">
                <items>
+                  <MenuItem mnemonicParsing="false" onAction="#show_about" text="FAQs" />
                   <MenuItem mnemonicParsing="false" onAction="#show_about" text="About" />
                </items>
             </Menu>
          </menus>
       </MenuBar>
+      <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="75.0" layoutY="273.0" onAction="#signup" prefHeight="18.0" prefWidth="136.0" ripplerFill="#808080bd" styleClass="customerLoginBtn" stylesheets="@../../../styles/button_hover.css" text="Sign Up" />
    </children>
 </AnchorPane>

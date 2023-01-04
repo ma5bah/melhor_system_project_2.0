@@ -1,21 +1,23 @@
 package com.lab.melhor;
 
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+
 import javafx.fxml.Initializable;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 import java.io.IOException;
-import java.net.URL;
 import java.util.Enumeration;
-import java.util.ResourceBundle;
 
-public class product_dashboard_controller implements Initializable {
+public class order_dashboard_controller implements Initializable {
+
     @FXML
-    private VBox scrollPnItems = null;
-
-
-
+    private Label item_name;
+    @FXML
+    private VBox pnItems;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -39,11 +41,8 @@ public class product_dashboard_controller implements Initializable {
                         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
                     }
                 };
-                nodes[i] = FXMLLoader.load(getClass().getResource("product_list_row.fxml"),r);
-//                nodes[i].getController();
-//                FXMLLoader.
-//                nodes[i]
-                // give the items some effect
+                nodes[i] = FXMLLoader.load(getClass().getResource("order_list_row.fxml"),r);
+
 
                 nodes[i].setOnMouseEntered(event -> {
                     nodes[j].setStyle("-fx-background-color : #0A0E3F");
@@ -51,12 +50,20 @@ public class product_dashboard_controller implements Initializable {
                 nodes[i].setOnMouseExited(event -> {
                     nodes[j].setStyle("-fx-background-color : #02030A");
                 });
-                scrollPnItems.getChildren().add(nodes[i]);
+                pnItems.getChildren().add(nodes[i]);
             } catch (IOException e) {
-                System.out.println("GONE TO");                e.printStackTrace();
+                e.printStackTrace();
             }
         }
 
     }
 
+    @FXML
+    private void get_all_order(){
+
+    }
+    @FXML
+    private void get_generated_order(){
+
+    }
 }

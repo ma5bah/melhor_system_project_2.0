@@ -16,7 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
-public class product_details_controller implements Initializable {
+public class order_details_controller implements Initializable {
     @FXML
     private AnchorPane root_product_panal;
     @FXML

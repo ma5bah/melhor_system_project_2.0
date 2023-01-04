@@ -20,7 +20,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
-public class item_list_controller implements Initializable {
+public class order_list_row_controller implements Initializable {
 
     @FXML
     private Label item_name;
@@ -35,11 +35,11 @@ public class item_list_controller implements Initializable {
     }
 
     @FXML
-    private void show_product() {
+    private void show_order() {
         // TODO make a slide show.
         // App.slide_from_right_side("product_details");
         try {
-            Parent slide_show_panal = FXMLLoader.load(App.class.getResource("product_details.fxml"));
+            Parent slide_show_panal = FXMLLoader.load(App.class.getResource("order_details.fxml"));
             AnchorPane root_panal = (AnchorPane) item_box.getScene().getRoot();
             slide_show_panal.setLayoutX(960);
             ArrayList<Node> item = new ArrayList<>();
@@ -51,16 +51,16 @@ public class item_list_controller implements Initializable {
                     item.add(iterable_element);
                 }
             }
-            AnchorPane invisible_panal = new AnchorPane();
-            invisible_panal.setPrefHeight(600);
-            invisible_panal.setPrefHeight(660);
-            // invisible_panal.setLayoutX(0);
-            // invisible_panal.setLayoutY(0);
-            invisible_panal.setId("invisible_panal_for_slide_show");
-            invisible_panal.setStyle("-fx-background-color:#ffffff;");
-            invisible_panal.setOnMouseClicked((ev) -> {
-                System.out.println(ev);
-            });
+            // AnchorPane invisible_panal = new AnchorPane();
+            // invisible_panal.setPrefHeight(600);
+            // invisible_panal.setPrefHeight(660);
+            // // invisible_panal.setLayoutX(0);
+            // // invisible_panal.setLayoutY(0);
+            // invisible_panal.setId("invisible_panal_for_slide_show");
+            // invisible_panal.setStyle("-fx-background-color:#ffffff;");
+            // invisible_panal.setOnMouseClicked((ev) -> {
+            //     System.out.println(ev);
+            // });
 
             // new EventHandler<Event>() {
 
@@ -84,7 +84,7 @@ public class item_list_controller implements Initializable {
             // });
             root_panal.getChildren().removeAll(item);
 
-            root_panal.getChildren().addAll(invisible_panal, slide_show_panal);
+            root_panal.getChildren().addAll( slide_show_panal);
             System.out.println(root_panal.getChildren().get(2).getLayoutX());
         } catch (IOException e) {
             e.printStackTrace();

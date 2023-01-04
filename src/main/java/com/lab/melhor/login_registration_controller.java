@@ -101,9 +101,7 @@ public class login_registration_controller implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            if (resources.getObject("login_state") == Boolean.TRUE) {
-                login_state = true;
-            }
+            login_state = resources.getObject("login_state") == Boolean.TRUE;
         } catch (NullPointerException | MissingResourceException e) {
 
             login_state = false;

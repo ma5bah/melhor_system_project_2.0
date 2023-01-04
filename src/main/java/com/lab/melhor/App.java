@@ -32,25 +32,32 @@ public class App extends Application {
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
+    static void set_root_with_resource(String fxml,ResourceBundle resourses) throws IOException {
+        scene.setRoot(load_fxml_with_resource(fxml,resourses));
+    }
 
-    static void slide_from_right_side(Parent root_panal,String fxml) throws IOException {
-        // Parent slide_show_panal = loadFXML(fxml);
+    static void slide_from_right_side(Parent root_panal, String fxml) throws IOException {
+        // Parent slide_show_panal = load_fxml_with_resource(fxml);
         // root_panal.getChildre
         // AnchorPane container = new AnchorPane();
         // slide_show_panal.setLayoutX(960);
         // container.getChildren().addAll(scene.getRoot(), slide_show_panal);
-        // scene.setRoot(container);
+        // scene.set_root_with_resource(container);
         // System.out.println(scene.getRoot().getScene());
 
     }
 
-    static Scene get_login_window() throws IOException {
-        ResourceBundle state = new ResourceBundle() {
-
+    static void login_registration(Boolean login_state) throws IOException {
+        ResourceBundle state;
+        state = new ResourceBundle() {
             @Override
             protected Object handleGetObject(String key) {
-                if (key == "login_state")
-                    return Boolean.TRUE;
+                if ("login_state".equals(key)) {
+                
+                    if (login_state == true) {
+                        return Boolean.TRUE;
+                    }
+                }
                 return Boolean.FALSE;
             }
 
@@ -61,10 +68,13 @@ public class App extends Application {
             }
 
         };
-        Scene login_window = new Scene(FXMLLoader.load(App.class.getResource("login.fxml"), state), 960, 600);
-        return login_window;
+        set_root_with_resource("login_registration",state);
     }
 
+    private static Parent load_fxml_with_resource(String fxml,ResourceBundle resourses) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"),resourses);
+        return fxmlLoader.load();
+    }
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();

@@ -1,27 +1,14 @@
 package com.lab.melhor;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.layout.StackPane;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.Enumeration;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class overview_dashboard implements Initializable {
     @FXML
@@ -52,7 +39,7 @@ public class overview_dashboard implements Initializable {
                         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
                     }
                 };
-                nodes[i] = FXMLLoader.load(getClass().getResource("Item.fxml"),r);
+                nodes[i] = FXMLLoader.load(getClass().getResource("product_list_row.fxml"),r);
 //                nodes[i].getController();
 //                FXMLLoader.
 //                nodes[i]
