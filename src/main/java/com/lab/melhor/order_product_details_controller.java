@@ -1,8 +1,6 @@
 package com.lab.melhor;
 
-import java.io.IOException;
 import java.net.URL;
-import java.util.Enumeration;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
@@ -11,17 +9,14 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
-public class order_details_controller implements Initializable {
+public class order_product_details_controller implements Initializable {
     @FXML
     private AnchorPane root_product_panal;
     @FXML
@@ -30,45 +25,25 @@ public class order_details_controller implements Initializable {
     private Label description_text;
     @FXML
     private ImageView product_image;
-    @FXML
-    private VBox pnItems;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Node[] nodes = new Node[10];
-        for (int i = 0; i < nodes.length; i++) {
-            try {
-
-                final int j = i;
-                ResourceBundle r=new ResourceBundle() {
-                    
-                    @Override
-                    protected Object handleGetObject(String key) {
-                        if(key=="name"){
-                            return "masbah"+Integer.toString(j);
-                        }
-                        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-                    }
-
-                    @Override
-                    public Enumeration<String> getKeys() {
-                        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-                    }
-                };
-                nodes[i] = FXMLLoader.load(getClass().getResource("order_cart_list_row.fxml"),r);
-
-
-                nodes[i].setOnMouseEntered(event -> {
-                    nodes[j].setStyle("-fx-background-color : #0A0E3F");
-                });
-                nodes[i].setOnMouseExited(event -> {
-                    nodes[j].setStyle("-fx-background-color : #02030A");
-                });
-                pnItems.getChildren().add(nodes[i]);
-            } catch (IOException e) {
-                e.printStackTrace();
+        try {
+            if (resources.getString("name_of_product") != null) {
+                name_text.setText(resources.getString("name_of_product"));
+            } else {
+                name_text.setText("Product Name is not available");
             }
-        }
+            if (resources.getString("description_of_product") != null) {
+                description_text.setText(resources.getString("description_of_product"));
+            } else {
+                name_text.setText("Product Name is not available");
+            }
 
+        } catch (NullPointerException | MissingResourceException e) {
+            e.getStackTrace();
+
+        }
         final Timeline timeline = new Timeline();
         timeline.getKeyFrames().addAll(
                 new KeyFrame(Duration.millis(500),

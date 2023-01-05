@@ -29,7 +29,7 @@ public class dashboard_controller implements Initializable {
     private Button btnProducts;
 
     @FXML
-    private Button btnMenus;
+    private Button btnPanel;
 
     @FXML
     private Button btnPackages;
@@ -82,8 +82,11 @@ public class dashboard_controller implements Initializable {
             clear_main_stack_pane();
             main_stack_pane.getChildren().add(new_panal);
         }
-        if (actionEvent.getSource() == btnMenus) {
+        if (actionEvent.getSource() == btnPanel) {
+           
+            Pane new_panal = new FXMLLoader(getClass().getResource("panel_dashboard.fxml")).load();
             clear_main_stack_pane();
+            main_stack_pane.getChildren().add(new_panal);
 
         }
         if (actionEvent.getSource() == btnOverview) {

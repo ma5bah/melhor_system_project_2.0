@@ -47,25 +47,33 @@ public class login_registration_controller implements Initializable {
 
     }
 
-    @FXML
-    private void abc() {
-        System.out.println("From login");
-
-    }
 
     @FXML
     private void registration_button_clicked() {
-        System.out.println("Registration button clicked");
+        try {
+            if (this.registration("null", "null")) {
+                this.login_on_mouse_clicked();
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
+    private Boolean registration(String username, String password) {
+        return true;
+    }
+
+    private Boolean login(String username, String password) {
+        return true;
     }
 
     @FXML
     private void login_button_clicked() {
-        System.out.println("Login button clicked");
         try {
-            App.setRoot("dashboard");
+            if (this.login("", "")) {
+                App.setRoot("dashboard");
+            }
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
