@@ -1,0 +1,143 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Inventory {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  // connection
+  employee_data Employee[]
+  storage_data  Storage[]
+  order_data    Order[]
+}
+
+enum product_category {
+  paper_made
+  liquid
+  general
+}
+
+enum type_of_employee {
+  admin
+  manager
+}
+
+model Employee {
+  id       Int              @id @default(autoincrement())
+  email    String           @unique
+  password String
+  contact  String
+  role     type_of_employee @default(manager)
+
+  // mapping
+  inventory    Inventory @relation(fields: [inventory_id], references: [id])
+  inventory_id Int
+}
+
+model Storage {
+  id       Int              @id @default(autoincrement())
+  name     String
+  address  String
+  capacity Int
+  category product_category
+
+  // connection
+  product_data Product[]
+
+  // mapping
+  inventory    Inventory @relation(fields: [inventory_id], references: [id])
+  inventory_id Int
+}
+
+model Product {
+  id          Int              @id @default(autoincrement())
+  name        String
+  category    product_category
+  quantity    Int
+  price       Float
+  need_space  Float
+  expiry_date DateTime
+
+  // connection
+  order_data    ProductAndOrder[]
+  supplier_data ProductAndSupplier[]
+  // mapping
+  storage       Storage              @relation(fields: [storage_id], references: [id])
+  storage_id    Int
+}
+
+model ProductAndSupplier {
+  // mapping
+  product     Product  @relation(fields: [product_id], references: [id])
+  product_id  Int
+  supplier    Supplier @relation(fields: [supplier_id], references: [id])
+  supplier_id Int
+
+  @@unique([product_id, supplier_id])
+}
+
+model Supplier {
+  id           Int                  @id @default(autoincrement())
+  username     String               @unique
+  company_name String
+  contact      String
+  address      String
+  //mapping
+  product_data ProductAndSupplier[]
+}
+
+enum type_of_order {
+  buy
+  sell
+}
+
+enum type_of_order_status {
+  pending
+  processing
+  delivered
+}
+
+model ProductAndOrder {
+  product_quantity Float
+
+  // mapping
+  product    Product @relation(fields: [product_id], references: [id])
+  product_id Int
+  order      Order   @relation(fields: [order_id], references: [id])
+  order_id   Int
+
+  @@unique([product_id, order_id])
+}
+
+model Order {
+  id           Int                  @id @default(autoincrement())
+  type         type_of_order
+  coupen       String
+  status       type_of_order_status
+  // mapping
+  payment_data Payment?
+  product_data ProductAndOrder[]
+  // connection
+  inventory    Inventory            @relation(fields: [inventory_id], references: [id])
+  inventory_id Int                  @unique
+}
+
+model Payment {
+  id             Int    @id @default(autoincrement())
+  transection_id String
+  total_amount   Float
+  medium         String
+
+  // connection
+  order    Order @relation(fields: [order_id], references: [id])
+  order_id Int   @unique
+}
