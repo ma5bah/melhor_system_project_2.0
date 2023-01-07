@@ -22,9 +22,9 @@
         </dependency>
   
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.31</version>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.5.1</version>
         </dependency>
         <dependency>
             <groupId>com.jfoenix</groupId>
@@ -46,7 +46,7 @@
         </dependency>-->
 
 
-         <dependency>
+         <!-- <dependency>
             <groupId>net.java.dev.timingframework</groupId>
             <artifactId>timingframework</artifactId>
             <version>1.0</version>
@@ -55,7 +55,7 @@
             <groupId>com.miglayout</groupId>
             <artifactId>miglayout-swing</artifactId>
             <version>5.2</version>
-        </dependency> 
+        </dependency>  -->
 
 
     

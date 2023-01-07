@@ -4,9 +4,7 @@
   "version": "0.0.0",
   "type": "commonjs",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
+    "dev": "ts-node script.ts",
     "prisma_build": "prisma migrate dev --name init",
     "prisma_studio": "prisma studio"
   },
@@ -17,6 +15,7 @@
     "typescript": "^4.9.4"
   },
   "dependencies": {
+    "@nestjs/common": "^9.2.1",
     "@prisma/client": "4.8.0"
   }
 }

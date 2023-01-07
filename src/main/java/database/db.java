@@ -2,12 +2,8 @@ package database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Date;
-import com.mysql.cj.jdbc.Driver;
+
 
 public class db {
     private static Connection source = null;
@@ -26,6 +22,7 @@ public class db {
     // System.out.println(e);
     // }
     // }
+
     public static Connection get_connection() {
         try {
             if (source != null)
