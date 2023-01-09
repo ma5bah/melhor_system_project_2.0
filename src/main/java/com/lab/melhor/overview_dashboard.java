@@ -4,21 +4,25 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Enumeration;
 import java.util.ResourceBundle;
 
+import BackEnd.db;
+
 public class overview_dashboard implements Initializable {
     @FXML
     private VBox pnItems = null;
-
+    @FXML 
+    private Label inventory_name;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        inventory_name.setText(db.getInventory().getName()+ " Overview");
         Node[] nodes = new Node[10];
         for (int i = 0; i < nodes.length; i++) {
             try {

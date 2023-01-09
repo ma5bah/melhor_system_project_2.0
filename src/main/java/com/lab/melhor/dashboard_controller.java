@@ -6,19 +6,33 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import BackEnd.db;
+
 
 public class dashboard_controller implements Initializable {
     @FXML
     private AnchorPane root_anchor_pane;
     @FXML
     private StackPane main_stack_pane;
+
+
+    @FXML
+    private Label employee_name;
+    @FXML
+    private ImageView employee_dp;
+    
     @FXML
     private Button btnOverview;
 
@@ -43,8 +57,11 @@ public class dashboard_controller implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
+            employee_name.setText( db.getEmployee().getName());
 
-            
+            employee_dp.setImage(new Image(new File(db.getEmployee().getDp()).getAbsolutePath()));
+            System.out.println(db.getEmployee().getDp());
+            System.out.println(new File("src/main/resources/assets/picture/default.png").getAbsoluteFile());
             Pane new_panal = FXMLLoader.load(App.class.getResource("overview_dashboard.fxml"));
             // FXMLLoader.load(App.class.getResource("overview_dashboard.fxml"));
             main_stack_pane.getChildren().addAll(new_panal);

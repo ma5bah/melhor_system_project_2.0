@@ -7,6 +7,7 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.paint.Color?>
@@ -17,19 +18,19 @@
    <children>
       <AnchorPane fx:id="login_pane" layoutX="475.0" layoutY="100.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#login_on_mouse_clicked" prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: #154360;">
          <children>
-            <TextField alignment="CENTER" layoutX="30.0" layoutY="109.0" prefHeight="38.0" prefWidth="240.0" promptText="EMAIL" />
+            <TextField fx:id="login_email" alignment="CENTER" layoutX="30.0" layoutY="109.0" prefHeight="38.0" prefWidth="240.0" promptText="EMAIL" />
             <Text fill="#7fb3d5" layoutX="117.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign in">
                <font>
                   <Font name="SansSerif Bold" size="20.0" />
                </font>
             </Text>
-            <TextField alignment="CENTER" layoutX="30.0" layoutY="176.0" prefHeight="38.0" prefWidth="240.0" promptText="PASSWORD" />
-            <CheckBox layoutX="30.0" layoutY="231.0" mnemonicParsing="false" text="Remember Me" textFill="#7fb3d5" />
+            <CheckBox fx:id="login_remember_check_box" layoutX="30.0" layoutY="231.0" mnemonicParsing="false" text="Remember Me" textFill="#7fb3d5" />
             <JFXButton layoutX="30.0" layoutY="278.0" onAction="#login_button_clicked" prefHeight="25.0" prefWidth="240.0" style="-fx-background-color: #568EFF;" text="Login">
                <font>
                   <Font size="18.0" />
                </font>
             </JFXButton>
+            <PasswordField fx:id="login_password" alignment="CENTER" layoutX="30.0" layoutY="172.0" prefHeight="38.0" prefWidth="240.0" promptText="PASSWORD" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="register_pane" layoutX="185.0" layoutY="40.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#register_on_mouse_clicked" prefHeight="520.0" prefWidth="300.0" style="-fx-background-color: #154360;">
@@ -39,14 +40,13 @@
                   <Font name="SansSerif Bold" size="20.0" />
                </font>
             </Text>
-            <TextField alignment="CENTER" layoutX="30.0" layoutY="350.0" prefHeight="38.0" prefWidth="240.0" promptText="PASSWORD" />
             <JFXButton layoutX="35.0" layoutY="450.0" onAction="#registration_button_clicked" prefHeight="25.0" prefWidth="240.0" style="-fx-background-color: #568EFF;" text="Sign Up">
                <font>
                   <Font size="18.0" />
                </font>
             </JFXButton>
             <Text fill="#7fb3d5" layoutX="54.0" layoutY="434.0" strokeType="OUTSIDE" strokeWidth="0.0" text="to our terms of service." />
-            <TextField alignment="CENTER" layoutX="30.0" layoutY="301.0" prefHeight="38.0" prefWidth="240.0" promptText="EMAIL" />
+            <TextField fx:id="registration_email" alignment="CENTER" layoutX="30.0" layoutY="301.0" prefHeight="38.0" prefWidth="240.0" promptText="EMAIL" />
             <JFXCheckBox checkedColor="#7fb3d5" layoutX="29.0" layoutY="400.0" text="By checking this box, you are agreeing" textFill="#7fb3d5" unCheckedColor="WHITE" />
             <JFXRadioButton layoutX="30.0" layoutY="273.0" text="Male" textFill="WHITE">
                <selectedColor>
@@ -70,7 +70,7 @@
                   <Font size="14.0" />
                </font>
             </JFXRadioButton>
-            <DatePicker layoutX="73.0" layoutY="226.0" prefHeight="25.0" prefWidth="195.0" />
+            <DatePicker fx:id="bod" layoutX="73.0" layoutY="226.0" prefHeight="25.0" prefWidth="195.0" />
             <Label layoutX="30.0" layoutY="225.0" text="BOD" textFill="#ebebeb">
                <font>
                   <Font size="18.0" />
@@ -81,8 +81,9 @@
                   <Font size="18.0" />
                </font>
             </JFXToggleButton>
-            <TextField alignment="CENTER" layoutX="30.0" layoutY="135.0" prefHeight="38.0" prefWidth="240.0" promptText="MOBILE NUMBER" />
-            <TextField alignment="CENTER" layoutX="30.0" layoutY="82.0" prefHeight="38.0" prefWidth="240.0" promptText="NAME" />
+            <TextField fx:id="registration_contact" alignment="CENTER" layoutX="30.0" layoutY="135.0" prefHeight="38.0" prefWidth="240.0" promptText="MOBILE NUMBER" />
+            <TextField fx:id="registration_name" alignment="CENTER" layoutX="30.0" layoutY="82.0" prefHeight="38.0" prefWidth="240.0" promptText="NAME" />
+            <PasswordField fx:id="registration_password" alignment="CENTER" layoutX="30.0" layoutY="350.0" prefHeight="38.0" prefWidth="240.0" promptText="PASSWORD" />
          </children>
       </AnchorPane>
    </children>

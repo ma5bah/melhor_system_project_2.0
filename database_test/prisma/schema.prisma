@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
@@ -32,11 +32,13 @@ enum type_of_employee {
 }
 
 model Employee {
-  id       Int              @id @default(autoincrement())
-  email    String           @unique
+  id       Int    @id @default(autoincrement())
+  email    String @unique
   password String
   contact  String
-  role     type_of_employee @default(manager)
+  role     String
+  name     String
+  dp       String
 
   // mapping
   inventory    Inventory @relation(fields: [inventory_id], references: [id])
@@ -44,11 +46,11 @@ model Employee {
 }
 
 model Storage {
-  id       Int              @id @default(autoincrement())
+  id       Int    @id @default(autoincrement())
   name     String
   address  String
   capacity Int
-  category product_category
+  category String
 
   // connection
   product_data Product[]
@@ -59,9 +61,9 @@ model Storage {
 }
 
 model Product {
-  id          Int              @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   name        String
-  category    product_category
+  category    String
   quantity    Int
   price       Float
   need_space  Float
@@ -119,16 +121,16 @@ model ProductAndOrder {
 }
 
 model Order {
-  id           Int                  @id @default(autoincrement())
-  type         type_of_order
+  id           Int               @id @default(autoincrement())
+  type         String
   coupen       String
-  status       type_of_order_status
+  status       String
   // mapping
   payment_data Payment?
   product_data ProductAndOrder[]
   // connection
-  inventory    Inventory            @relation(fields: [inventory_id], references: [id])
-  inventory_id Int                  @unique
+  inventory    Inventory         @relation(fields: [inventory_id], references: [id])
+  inventory_id Int               @unique
 }
 
 model Payment {

@@ -15,7 +15,7 @@
       <Pane fx:id="pnlOverview" prefHeight="554.0" prefWidth="793.0">
          <children>
             <TextField layoutX="590.0" layoutY="47.0" prefHeight="27.0" prefWidth="183.0" promptText="search" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
-            <Label layoutX="57.0" layoutY="25.0" text="Overview" textFill="#e7e5e5">
+            <Label fx:id="inventory_name" layoutX="57.0" layoutY="25.0" text="Overview" textFill="#e7e5e5">
                <font>
                   <Font size="24.0" />
                </font>

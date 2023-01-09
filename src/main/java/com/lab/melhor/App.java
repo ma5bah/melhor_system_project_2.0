@@ -1,6 +1,7 @@
 package com.lab.melhor;
 
 import BackEnd.db;
+import BackEnd.database_schema.Inventory;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -85,7 +86,10 @@ public class App extends Application {
         // db.set_product_data();
         // db.get_product_data();
         // state = new login_registration();
+        db.init_db();
+
         launch();
+        db.closeConnections();
     }
 
 }

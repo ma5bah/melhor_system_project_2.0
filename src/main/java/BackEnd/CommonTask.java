@@ -25,10 +25,18 @@ import BackEnd.TableView.ResizeHelper;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CommonTask extends App {
     public static Stage newStage;
     public static double xx, yy;
+    public static void log_info(Object ex, String message){
+        Logger.getLogger(db.class.getName()).log(Level.INFO, message, ex);
+    }
+    public static void log(Level _level,Object ex, String message){
+        Logger.getLogger(db.class.getName()).log(_level, message, ex);
+    }
 
 //    public static void pageNavigation(String to, Stage stage, Class<?> classes, String title, int width, int height) throws IOException {
 //        double xTemp = x;

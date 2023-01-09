@@ -1,172 +1,109 @@
 package BackEnd;
 
+import BackEnd.database_schema.Employee;
+import BackEnd.database_schema.Inventory;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.text.SimpleDateFormat;
-import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class db {
 
-    public static final String URL = "jdbc:postgresql://192.168.0.107:5432/";
+    public static final String DB_URL = "jdbc:mysql://localhost:3306/";
     public static final String DB_NAME = "test";
-    public static final String USERNAME = "user";
-    public static final String PASSWORD = "password";
+    public static final String USERNAME = "root";
+    public static final String PASSWORD = "";
 
     public static Connection source = null;
 
-    db() {
-        getConnections();
+    private static Employee employee = null;
+    private static Inventory inventory = null;
+
+    private static boolean isEmployeeAvailable() {
+        return employee != null;
     }
 
-    public void finalize() {
+    public static Employee getEmployee() {
+        return employee;
+    }
+
+    public static Inventory getInventory() {
+        return inventory;
+    }
+
+    // db() {
+    // makeConnections();
+    // }
+
+    public static void main(String[] args) {
+        makeConnections();
+        // System.out.println(signup("masbahuddin64@gmail.com", "123456",
+        // "01311807889"));
+        // login("masbahuddin64@gmail.com", "123456");
         closeConnections();
     }
 
-    public static void main(String[] args) {
-        getConnections();
-        // signup();
-        login("masbahuddin60@gmail.com","123456");
-    }
-
     /*
-     * INSERT INTO "public"."Inventory" ("id","name") VALUES ($1,$2) RETURNING
-     * "public"."Inventory"."id"
+     * INSERT INTO `test`.`Storage`
+     * (`id`,`name`,`address`,`capacity`,`category`,`inventory_id`) VALUES
+     * (?,?,?,?,?,?)
      * 
-     * INSERT INTO "public"."Employee"
-     * ("email","password","contact","role","inventory_id") VALUES ($1,$2,$3,$4,$5)
-     * RETURNING "public"."Employee"."id"
-     * ["masbah@gmail.com","123456","01311807889","manager",0]
-     * 
-     * 
-     * SELECT "public"."Employee"."id", "public"."Employee"."email",
-     * "public"."Employee"."password", "public"."Employee"."contact",
-     * "public"."Employee"."role", "public"."Employee"."inventory_id" FROM
-     * "public"."Employee" WHERE ("public"."Employee"."email" = $1 AND
-     * "public"."Employee"."password" = $2) LIMIT $3 OFFSET $4
-     * ["masbah@gmail.com","123456",1,0]
+     * INSERT INTO `test`.`Product`
+     * (`id`,`name`,`category`,`quantity`,`price`,`need_space`,`expiry_date`,`
+     * storage_id`) VALUES (?,?,?,?,?,?,?,?)
+     * [null,"don","general",100,12.00000000000000,1.
+     * 000000000000000,"2023-08-04 02:16:32.716 UTC",1]
      */
 
     public static boolean login(String email, String password) {
-        try {
-
-            PreparedStatement st = source.prepareStatement(
-                "SELECT * FROM \"public\".\"Employee\" WHERE (\"public\".\"Employee\".\"email\" = ? AND \"public\".\"Employee\".\"password\" = ?) OFFSET ?"
-                );
-
-            st.setString(1, email);
-            st.setString(2, password);
-            st.setInt(3, 0);
-            ResultSet rs = st.executeQuery();
-            // while (rs.next()) {
-            // System.out.print("Column 1 returned ");
-            // System.out.println(rs.getString(1));
-            // }
-            // while(rs.next()){
-            // System.out.println(rs.getString(1));
-            // }
-            
-            System.out.println(rs.getRow());
-
-            rs.close();
-            st.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(db.class.getName()).log(Level.SEVERE, null, ex);
+        employee = Employee.login( email, password);
+        if (employee == null) {
+            return false;
         }
         return true;
     }
 
-    public static boolean signup() {
-        try {
-            PreparedStatement st = source.prepareStatement(
-                    "INSERT INTO \"public\".\"Employee\" (\"email\",\"password\",\"contact\",\"role\",\"inventory_id\") VALUES (?,?,?,?,?) RETURNING \"public\".\"Employee\".\"id\"");
-            // st.setString(3, );
-            st.setString(1, "masbahuddin60@gmail.com");
-            st.setString(2, "123456");
-            st.setString(3, "01311807889");
-            // st.setString(4, "manager");
-            st.setInt(4, 0);
-
-            // ["masbah@gmail.com","123456","01311807889","manager",0]
-            ResultSet rs = st.executeQuery();
-            // while (rs.next()) {
-            // System.out.print("Column 1 returned ");
-            // System.out.println(rs.getString(1));
-            // }
-            // while(rs.next()){
-            // System.out.println(rs.getString(1));
-            // }
-            System.out.println(rs);
-            rs.close();
-            st.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(db.class.getName()).log(Level.SEVERE, null, ex);
+    public static boolean signup(String email, String password, String contact,String name) {
+        employee = Employee.signup( email, password, contact,name);
+        if (employee == null) {
+            return false;
         }
         return true;
     }
 
-    public static Connection getConnections() {
-        if (source != null) {
+    public static void init_db() {
+        makeConnections();
+        inventory = Inventory.create_inventory();
+    }
+
+    public static Connection makeConnections() {
+        if (isConnectionAvailable()) {
             return source;
         }
         try {
-            // Class.forName("com.mysql.cj.jdbc.Driver");
-            // source = DriverManager.getConnection(URL + DB_NAME, USERNAME, PASSWORD);
-            // return source;
-
-            Properties props = new Properties();
-            props.setProperty("user", USERNAME);
-            props.setProperty("password", PASSWORD);
+            // Properties props = new Properties();
+            // props.setProperty("user", USERNAME);
+            //// props.setProperty("password", PASSWORD);
+            // props.setProperty("tcpKeepAlive","true");
             // props.setProperty("ssl", "true");
-            return source = DriverManager.getConnection(URL + DB_NAME, props);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+            Class.forName("com.mysql.cj.jdbc.Driver");
 
-    public static void set_product_data() {
-        try {
-            PreparedStatement psmt = source.prepareStatement(
-                    "INSERT INTO product (id, name, order_date, delivery_date, status, owner_id, description) VALUES (?,?,?,?,?,?,?)");
-            psmt.setInt(1, 1);
-            psmt.setString(2, "book");
-            long time = new SimpleDateFormat("yyyy-MM-dd").parse("2001-10-04").getTime();
-            psmt.setDate(3, new java.sql.Date(time));
-            psmt.setDate(4, new java.sql.Date(time));
-            psmt.setString(5, "pending");
-            psmt.setInt(6, 10);
-            psmt.setString(7, "good");
-            psmt.execute();
+            // source=DriverManager.getConnection("postgresql://192.168.0.107:5432/test");
+            source = DriverManager.getConnection("jdbc:mysql://root@localhost:3306/test");
+            System.out.printf("Database is %s \n", !source.isClosed() ? "connected" : "not ok");
+            System.out.printf("%s/%s \n", source.getCatalog(), source.getSchema());
+            return source;
+
         } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
-    public static void get_product_data() {
-        try {
-            if (source == null) {
-                getConnections();
-            }
-            if (source == null) {
-                return;
-            }
-            Statement s = source.createStatement();
-            ResultSet res = s.executeQuery("SELECT * FROM `product`");
-            System.out.println(res.getRow());
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
-
-    public boolean checkConnections() {
+    public static boolean isConnectionAvailable() {
         return source != null;
     }
 
@@ -174,8 +111,8 @@ public class db {
         if (source != null) {
             try {
                 source.close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
+            } catch (SQLException error) {
+                error.printStackTrace();
             }
         }
     }

@@ -4,7 +4,8 @@ module com.lab.melhor {
     requires javafx.fxml;
     requires com.jfoenix;
 //    requires melhor.system.project;
-    requires org.postgresql.jdbc;
+//    requires org.postgresql.jdbc;
+    requires mysql.connector.j;
     requires java.sql;
     requires java.base;
     // requires timingframework;

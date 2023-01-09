@@ -1,4 +1,4 @@
-import { PrismaClient, type_of_employee } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { prisma } from "../script";
 
 export async function employee_login() {
@@ -25,6 +25,7 @@ export async function create_employee(email: string) {
                 email: email,
                 password: "123456",
                 contact: "01311807889",
+                role:"manager"
             },
         });
     } catch (error) {

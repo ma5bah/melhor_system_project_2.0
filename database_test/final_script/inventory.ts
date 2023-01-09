@@ -1,13 +1,13 @@
-import { PrismaClient, type_of_employee } from "@prisma/client";
 import { prisma } from "../script";
 export async function create_inventory() {
   try {
-    await prisma.inventory.create({
+    const data=await prisma.inventory.create({
       data: {
-        name: "don_masbah",
+        name: "don",
         id: 0,
       },
     });
+    console.log(data.name)
   } catch (error) {
     console.error("ERROR : ", error);
   }

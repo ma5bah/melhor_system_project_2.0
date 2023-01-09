@@ -2,6 +2,7 @@ import {  PrismaClient } from "@prisma/client";
 import { Logger } from "@nestjs/common";
 import { create_employee, employee_login } from "./final_script/emloyee";
 import { create_inventory } from "./final_script/inventory";
+import { create_product } from "./final_script/product";
 export const prisma = new PrismaClient({
   log: [
     {
@@ -17,19 +18,10 @@ export const prisma = new PrismaClient({
 async function main() {
   try {
 
-    
-
-
-
-
-
-
-
-
-
-    // await create_inventory();
-    await create_employee("masbahuddin65@gmail.com");
+    await create_inventory();
+    // await create_employee("masbahuddin65@gmail.com");
     // await employee_login();
+    await create_product("don");
   } catch (error) {
     console.error("ERROR : ", error);
   }

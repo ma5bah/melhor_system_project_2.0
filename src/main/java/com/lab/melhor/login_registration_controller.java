@@ -6,17 +6,40 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import java.io.IOException;
 import java.net.URL;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+
+import BackEnd.CommonTask;
+import BackEnd.db;
+import BackEnd.database_schema.Employee;
 
 public class login_registration_controller implements Initializable {
     private Boolean login_state;
     // @FXML
     // private JFXButton login_button;
+    @FXML
+    private TextField registration_contact;
+    @FXML
+    private TextField registration_email;
+    @FXML
+    private PasswordField registration_password;
+    @FXML
+    private TextField    registration_name;
+    @FXML 
+    private TextField login_email;
+    @FXML
+    private PasswordField login_password;
+    @FXML
+    private CheckBox login_remember_check_box;
     @FXML
     private AnchorPane register_pane;
     @FXML
@@ -47,31 +70,51 @@ public class login_registration_controller implements Initializable {
 
     }
 
-
     @FXML
     private void registration_button_clicked() {
         try {
-            if (this.registration("null", "null")) {
-                this.login_on_mouse_clicked();
+            // System.out.println(registration_contact.getText()+" "+registration_email.getText()+" "+registration_password.getText());
+            if (registration_contact.getText() == ""||registration_contact.getText() == null
+                    || registration_email.getText() == ""|| registration_email.getText() == null
+                    || registration_password.getText() == ""|| registration_password.getText() == null
+                    || registration_name.getText() == ""|| registration_name.getText() == null) {
+                CommonTask.showAlert(AlertType.ERROR, "Incomplete information","Necessary infornmation must be provided");
+                return;
             }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            if (this.registration(registration_email.getText(), registration_password.getText(),
+                    registration_contact.getText(),registration_name.getText())) {
+                        App.setRoot("dashboard");
+            }else{
+                
+                CommonTask.showAlert(AlertType.ERROR, "Incomplete information","Necessary infornmation must be provided");
+            }
+        } catch (IOException e) {
+            CommonTask.log(Level.SEVERE, e, e.getMessage());
+       
         }
     }
 
-    private Boolean registration(String username, String password) {
-        return true;
+    private Boolean registration(String email, String password, String contact,String name) {
+        return db.signup(email, password, contact,name);
     }
 
-    private Boolean login(String username, String password) {
-        return true;
+    private Boolean login(String email, String password) {
+        return db.login(email, password);
     }
 
     @FXML
     private void login_button_clicked() {
         try {
-            if (this.login("", "")) {
+            if (login_email.getText() == ""|| login_email.getText() == null
+                    || login_password.getText() == ""|| login_password.getText() == null) {
+                CommonTask.showAlert(AlertType.ERROR, "Incomplete information","Necessary infornmation must be provided");
+                return;
+            }
+            if (this.login(login_email.getText(), login_password.getText())) {
                 App.setRoot("dashboard");
+            }else{
+                CommonTask.showAlert(AlertType.ERROR, "Wrong information","Necessary infornmation must be provided");
+                return;
             }
         } catch (IOException e) {
             e.printStackTrace();
