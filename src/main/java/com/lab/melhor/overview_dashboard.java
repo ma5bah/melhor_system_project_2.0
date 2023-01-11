@@ -22,6 +22,7 @@ public class overview_dashboard implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        
         inventory_name.setText(db.getInventory().getName()+ " Overview");
         Node[] nodes = new Node[10];
         for (int i = 0; i < nodes.length; i++) {

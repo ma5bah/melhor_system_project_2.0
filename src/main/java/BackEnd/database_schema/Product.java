@@ -1,12 +1,16 @@
 package BackEnd.database_schema;
 
+import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.logging.Level;
 
 import BackEnd.CommonTask;
+import database.db;
 
 public class Product {
 
@@ -34,20 +38,43 @@ public class Product {
     }
   }
 
-  public static Product create_product(java.sql.Connection source,
+  public static Product create_product(
       String product_name,
       String product_category,
       Double product_price,
       int product_need_space,
+      int product_quatity,
       Timestamp product_expiry_date,
       int product_storage) {
     try {
+      Connection source = db.get_connection();
       PreparedStatement st = source.prepareStatement(
-          "INSERT INTO `test`.`Product` (`id`,`name`,`category`,`quantity`,`price`,`need_space`,`expiry_date`,`storage_id`) VALUES (?,?,?,?,?,?,?,?)");
+          "INSERT INTO `Product` (`name`,`category`,`quantity`,`price`,`need_space`,`expiry_date`,`storage_id`) VALUES (?,?,?,?,?,?,?)");
       st.setString(1, product_name);
+      st.setString(2, product_category);
+      st.setInt(3, product_quatity);
+      st.setDouble(4, product_price);
+      st.setInt(5, product_need_space);
+      st.setDate(6, new Date(product_expiry_date.getTime()));
+      st.setInt(7, product_storage);
       ResultSet rs = st.executeQuery();
       rs.next();
       return new Product(rs);
+    } catch (SQLException ex) {
+      CommonTask.log(Level.SEVERE, ex, ex.getMessage());
+    }
+    return null;
+  }
+
+  public static Product get_all_product() {
+    try {
+      Connection source = db.get_connection();
+      PreparedStatement st = source.prepareStatement(
+          "SELECT * FROM `Product`");
+      ResultSet rs = st.executeQuery();
+      while (rs.next()) {
+        System.out.println(new Product(rs).toString());
+      }
     } catch (SQLException ex) {
       CommonTask.log(Level.SEVERE, ex, ex.getMessage());
     }

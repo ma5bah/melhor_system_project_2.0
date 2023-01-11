@@ -5,11 +5,7 @@ import BackEnd.database_schema.Inventory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class db {
 
@@ -23,12 +19,18 @@ public class db {
     private static Employee employee = null;
     private static Inventory inventory = null;
 
-    private static boolean isEmployeeAvailable() {
+    public static boolean isEmployeeAvailable() {
         return employee != null;
     }
 
     public static Employee getEmployee() {
         return employee;
+    }
+    public static void setEmployee(Employee _employee){
+        employee=_employee;
+    }
+    public static void logout(){
+        setEmployee(null);
     }
 
     public static Inventory getInventory() {

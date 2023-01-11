@@ -4,12 +4,16 @@ import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import java.io.IOException;
@@ -33,8 +37,8 @@ public class login_registration_controller implements Initializable {
     @FXML
     private PasswordField registration_password;
     @FXML
-    private TextField    registration_name;
-    @FXML 
+    private TextField registration_name;
+    @FXML
     private TextField login_email;
     @FXML
     private PasswordField login_password;
@@ -73,29 +77,29 @@ public class login_registration_controller implements Initializable {
     @FXML
     private void registration_button_clicked() {
         try {
-            // System.out.println(registration_contact.getText()+" "+registration_email.getText()+" "+registration_password.getText());
-            if (registration_contact.getText() == ""||registration_contact.getText() == null
-                    || registration_email.getText() == ""|| registration_email.getText() == null
-                    || registration_password.getText() == ""|| registration_password.getText() == null
-                    || registration_name.getText() == ""|| registration_name.getText() == null) {
-                CommonTask.showAlert(AlertType.ERROR, "Incomplete information","Necessary infornmation must be provided");
+            // System.out.println(registration_contact.getText()+"
+            // "+registration_email.getText()+" "+registration_password.getText());
+            if (check_registration_info()) {
+                CommonTask.showAlert(AlertType.ERROR, "Incomplete information",
+                        "Necessary infornmation must be provided");
                 return;
             }
             if (this.registration(registration_email.getText(), registration_password.getText(),
-                    registration_contact.getText(),registration_name.getText())) {
-                        App.setRoot("dashboard");
-            }else{
-                
-                CommonTask.showAlert(AlertType.ERROR, "Incomplete information","Necessary infornmation must be provided");
+                    registration_contact.getText(), registration_name.getText())) {
+                App.setRoot("dashboard");
+            } else {
+
+                CommonTask.showAlert(AlertType.ERROR, "Incomplete information",
+                        "Necessary infornmation must be provided");
             }
         } catch (IOException e) {
             CommonTask.log(Level.SEVERE, e, e.getMessage());
-       
+
         }
     }
 
-    private Boolean registration(String email, String password, String contact,String name) {
-        return db.signup(email, password, contact,name);
+    private Boolean registration(String email, String password, String contact, String name) {
+        return db.signup(email, password, contact, name);
     }
 
     private Boolean login(String email, String password) {
@@ -104,16 +108,17 @@ public class login_registration_controller implements Initializable {
 
     @FXML
     private void login_button_clicked() {
+       
         try {
-            if (login_email.getText() == ""|| login_email.getText() == null
-                    || login_password.getText() == ""|| login_password.getText() == null) {
-                CommonTask.showAlert(AlertType.ERROR, "Incomplete information","Necessary infornmation must be provided");
+            if (check_login_info()) {
+                CommonTask.showAlert(AlertType.ERROR, "Incomplete information",
+                        "Necessary infornmation must be provided");
                 return;
             }
             if (this.login(login_email.getText(), login_password.getText())) {
                 App.setRoot("dashboard");
-            }else{
-                CommonTask.showAlert(AlertType.ERROR, "Wrong information","Necessary infornmation must be provided");
+            } else {
+                CommonTask.showAlert(AlertType.ERROR, "Wrong information", "Necessary infornmation must be provided");
                 return;
             }
         } catch (IOException e) {
@@ -165,6 +170,62 @@ public class login_registration_controller implements Initializable {
             login_pane.setTranslateZ(-10);
         }
     }
+
+    private boolean check_login_info() {
+        return login_email.getText() == "" || login_email.getText() == null
+                || login_password.getText() == "" || login_password.getText() == null;
+    }
+
+    private boolean check_registration_info() {
+        return registration_contact.getText() == "" || registration_contact.getText() == null
+                || registration_email.getText() == "" || registration_email.getText() == null
+                || registration_password.getText() == "" || registration_password.getText() == null
+                || registration_name.getText() == "" || registration_name.getText() == null;
+    }
+
+    @FXML
+    private void handle_key_press_event(KeyEvent evt) {
+        // if(evt.getEventType().equals(KeyEvent.KEY_PRESSED)){
+        // evt.code
+        // }
+        if (evt.getSource() == registration_name) {
+            System.out.println("from name");
+            System.out.println(evt.getCharacter());
+            System.out.println(registration_name.getText());
+        }
+        if (evt.getSource() == login_password) {
+            if (evt.getCode().equals(KeyCode.ENTER)) {
+                login_button_clicked();
+            }
+        }
+        if (evt.getSource() == registration_password) {
+            if (evt.getCode().equals(KeyCode.ENTER)) {
+                registration_button_clicked();
+            }
+        }
+        // System.out.println(evt.getCharacter()==Character);
+        // System.out.println(evt.getText());
+
+        // System.out.println(evt.getTarget());
+        // System.out.println(evt);
+    }
+
+    // public void handleClicks(Event actionEvent) throws IOException {
+    // // for (Node iterable_element : main_stack_pane.getChildren()) {
+    // // System.out.print(iterable_element + " ");
+    // // }
+    // // System.out.println();
+    // // pnlMenus.setStyle("-fx-background-color : #53639F");
+    // // pnlMenus.toFront();
+
+    // System.out.println("null");
+
+    // if (actionEvent.getSource() == registration_name) {
+
+    // System.out.println("null 2.0");
+    // }
+
+    // }
 
 }
 

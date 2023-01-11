@@ -1,6 +1,10 @@
 package com.lab.melhor;
 
 import java.net.URL;
+import java.sql.Timestamp;
+import java.time.LocalTime;
+import java.util.Date;
+import java.util.List;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
@@ -8,9 +12,15 @@ import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -20,25 +30,37 @@ public class product_add_product_controller implements Initializable {
     @FXML
     private AnchorPane root_product_panal;
     @FXML
-    private Text name_text;
+    private TextField product_name;
     @FXML
-    private Label description_text;
+    private TextField product_price;
     @FXML
-    private ImageView product_image;
+    private ComboBox<String> product_category;
+    @FXML
+    private Spinner<Integer> product_quantity;
+    @FXML
+    private Spinner<Integer> product_needed_space;
+    @FXML
+    private Spinner<Integer> product_storage_id;
+    @FXML
+    private DatePicker product_expiry_date;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            if (resources.getString("name_of_product") != null) {
-                name_text.setText(resources.getString("name_of_product"));
-            } else {
-                name_text.setText("Product Name is not available");
-            }
-            if (resources.getString("description_of_product") != null) {
-                description_text.setText(resources.getString("description_of_product"));
-            } else {
-                name_text.setText("Product Name is not available");
-            }
+            final int initialValue = 1;
+
+            // Value factory.
+            SpinnerValueFactory<Integer> valueFactory = //
+                    new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100000, initialValue);
+            product_quantity.setValueFactory(valueFactory);
+            product_quantity.setPromptText("Quantity");
+            // if (resources.getString("product_name") != null) {
+            //     product_name.setText(resources.getString("product_name"));
+            // }
+            // if (resources.getString("product_name") != null) {
+            //     product_name.setText(resources.getString("product_name"));
+            // } 
+            
 
         } catch (NullPointerException | MissingResourceException e) {
             e.getStackTrace();
@@ -51,14 +73,7 @@ public class product_add_product_controller implements Initializable {
                                 Interpolator.EASE_IN)));
         timeline.play();
         
-        // for (Node iterable_element : root_panal.getChildren()) {
-        //     if (iterable_element.getId() == null)
-        //         continue;
-        //     if (iterable_element.getId().compareTo("root_product_panal") == 0) {
-        //         iterable_element.onMouseClickedProperty();
-        //     }
-        // }
-        // System.out.println(root_product_panal.getScene());
+
     }
 
     @FXML
@@ -80,5 +95,12 @@ public class product_add_product_controller implements Initializable {
         timeline.setOnFinished((ev) -> {
             root_panal.getChildren().remove(root_product_panal);
         });
+    }
+    @FXML
+    private void add_product(){
+        if(product_expiry_date.getValue()!=null){
+            
+            System.out.println(Timestamp.valueOf(product_expiry_date.getValue().atTime(LocalTime.MIDNIGHT)));
+        }
     }
 }

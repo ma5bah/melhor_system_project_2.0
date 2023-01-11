@@ -17,9 +17,10 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 
+import BackEnd.CommonTask;
 import BackEnd.db;
-
 
 public class dashboard_controller implements Initializable {
     @FXML
@@ -27,12 +28,11 @@ public class dashboard_controller implements Initializable {
     @FXML
     private StackPane main_stack_pane;
 
-
     @FXML
     private Label employee_name;
     @FXML
     private ImageView employee_dp;
-    
+
     @FXML
     private Button btnOverview;
 
@@ -57,11 +57,14 @@ public class dashboard_controller implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            employee_name.setText( db.getEmployee().getName());
-
+            if (!db.isEmployeeAvailable()) {
+                App.setRoot("login_registration");
+                return;
+            }
+            employee_name.setText(db.getEmployee().getName());
             employee_dp.setImage(new Image(new File(db.getEmployee().getDp()).getAbsolutePath()));
-            System.out.println(db.getEmployee().getDp());
-            System.out.println(new File("src/main/resources/assets/picture/default.png").getAbsoluteFile());
+            // System.out.println(db.getEmployee().getDp());
+            // System.out.println(new File("src/main/resources/assets/picture/default.png").getAbsoluteFile());
             Pane new_panal = FXMLLoader.load(App.class.getResource("overview_dashboard.fxml"));
             // FXMLLoader.load(App.class.getResource("overview_dashboard.fxml"));
             main_stack_pane.getChildren().addAll(new_panal);
@@ -71,36 +74,45 @@ public class dashboard_controller implements Initializable {
             e.printStackTrace();
         }
 
-
     }
 
     private void clear_main_stack_pane() {
-            try {
-                    main_stack_pane.getChildren().remove(0);
+        try {
+            main_stack_pane.getChildren().remove(0);
 
-            } catch (Exception error) {
-                System.out.println(" ERROR : "+error);
-            }
+        } catch (Exception error) {
+            System.out.println(" ERROR : " + error);
+        }
 
     }
-
+    // @FXML
+    // public void logout(){
+    //     try {
+            
+    //     } catch (IOException e) {
+    //         CommonTask.log(Level.SEVERE, e, e.getMessage());
+    //     }
+    // }
     public void handleClicks(ActionEvent actionEvent) throws IOException {
-        for (Node iterable_element : main_stack_pane.getChildren()) {
-            System.out.print(iterable_element + " ");
-        }
-        System.out.println();
+        // for (Node iterable_element : main_stack_pane.getChildren()) {
+        // System.out.print(iterable_element + " ");
+        // }
+        // System.out.println();
         // pnlMenus.setStyle("-fx-background-color : #53639F");
         // pnlMenus.toFront();
+            if(actionEvent.getSource()==btnSignout){
+                db.logout();
+            App.setRoot("login_registration");
+            }
 
         if (actionEvent.getSource() == btnProducts) {
-
 
             Pane new_panal = new FXMLLoader(getClass().getResource("product_dashboard.fxml")).load();
             clear_main_stack_pane();
             main_stack_pane.getChildren().add(new_panal);
         }
         if (actionEvent.getSource() == btnPanel) {
-           
+
             Pane new_panal = new FXMLLoader(getClass().getResource("panel_dashboard.fxml")).load();
             clear_main_stack_pane();
             main_stack_pane.getChildren().add(new_panal);
