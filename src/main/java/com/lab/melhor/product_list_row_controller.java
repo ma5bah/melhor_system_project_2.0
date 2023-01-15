@@ -15,23 +15,37 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 public class product_list_row_controller implements Initializable {
-
+    private int item_id;
     @FXML
     private Label item_name;
+    @FXML
+    private Label item_expiry_date;
+    @FXML
+    private Label item_category;
+    @FXML
+    private Label item_price;
+    @FXML
+    private Button item_quantity;
+
     @FXML
     HBox item_box;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // System.out.print("From Item : ");
-        item_name.setText(resources.getString("name"));
-        // System.out.println(resources.getString("name"));
+        item_name.setText(resources.getString("item_name"));
+        // this.item_id=Integer.parseInt( resources.getString("item_id"));
+        // item_name.setText(resources.getString("item_expiry_date"));
+        // item_name.setText(resources.getString("item_category"));
+        // item_name.setText(resources.getString("item_price"));
+        // item_name.setText(resources.getString("item_quantity"));
     }
 
     @FXML

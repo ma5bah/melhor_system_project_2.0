@@ -8,10 +8,12 @@ import java.util.List;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import BackEnd.database_schema.Product;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -32,7 +34,7 @@ public class product_add_product_controller implements Initializable {
     @FXML
     private TextField product_name;
     @FXML
-    private TextField product_price;
+    private Spinner<Double> product_price;
     @FXML
     private ComboBox<String> product_category;
     @FXML
@@ -47,21 +49,15 @@ public class product_add_product_controller implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            final int initialValue = 1;
 
-            // Value factory.
-            SpinnerValueFactory<Integer> valueFactory = //
-                    new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100000, initialValue);
-            product_quantity.setValueFactory(valueFactory);
-            product_quantity.setPromptText("Quantity");
-            // if (resources.getString("product_name") != null) {
-            //     product_name.setText(resources.getString("product_name"));
-            // }
-            // if (resources.getString("product_name") != null) {
-            //     product_name.setText(resources.getString("product_name"));
-            // } 
-            
 
+            ObservableList<String> category = FXCollections.observableArrayList();
+            category.addAll(Product.get_category());
+            product_category.setItems(category);
+            product_quantity.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0,10000000));
+            product_price.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(1, 100000));
+            product_needed_space.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0,10000000));
+            product_storage_id.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0,10000000));
         } catch (NullPointerException | MissingResourceException e) {
             e.getStackTrace();
 
@@ -79,13 +75,7 @@ public class product_add_product_controller implements Initializable {
     @FXML
     private void close_me() {
         AnchorPane root_panal = (AnchorPane) root_product_panal.getScene().getRoot();
-        // for (Node iterable_element : root_panal.getChildren()) {
-        //     if (iterable_element.getId() == null)
-        //         continue;
-        //     if (iterable_element.getId().compareTo("root_product_panal") == 0) {
-                
-        //     }
-        // }
+
         final Timeline timeline = new Timeline();
         timeline.getKeyFrames().addAll(
                 new KeyFrame(Duration.millis(750),
@@ -96,11 +86,14 @@ public class product_add_product_controller implements Initializable {
             root_panal.getChildren().remove(root_product_panal);
         });
     }
+
+    private boolean check_product_details(){
+        return product_category.getValue()!=""||product_price.getValue().doubleValue()>0||product_quantity.getValue().intValue()>0||product_needed_space.getValue().intValue()>0||product_name.getText()!=""||product_name.getText()!=null;
+    }
     @FXML
     private void add_product(){
-        if(product_expiry_date.getValue()!=null){
-            
-            System.out.println(Timestamp.valueOf(product_expiry_date.getValue().atTime(LocalTime.MIDNIGHT)));
+        if(check_product_details()){
+            Product.create_product(product_name.getText(), product_category.getValue(), product_price.getValue(), product_needed_space.getValue().intValue(), product_quantity.getValue().intValue(),product_expiry_date.getValue().atStartOfDay() , product_storage_id.getValue().intValue());
         }
     }
 }

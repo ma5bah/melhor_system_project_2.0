@@ -1,5 +1,14 @@
 package BackEnd.database_schema;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+
+import BackEnd.CommonTask;
+import BackEnd.db;
 
 public class Order {
 
@@ -8,8 +17,58 @@ public class Order {
   private String coupen;
   private String status;
   private long inventoryId;
-
-
+  public Order(ResultSet rs) {
+    try {
+      this.setId(rs.getLong("id"));
+      this.setCoupen(rs.getString("coupen"));
+      this.setInventoryId(rs.getInt("inventory_id"));
+      this.setStatus(rs.getString("status"));
+      this.setType(rs.getString("type"));
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+  }
+  public static ArrayList<Order> get_all_order(){
+    try {
+      Connection source = db.makeConnections();
+      PreparedStatement st = source.prepareStatement(
+          "SELECT * FROM `Order`");
+      ResultSet rs = st.executeQuery();
+      ArrayList<Order> list=new ArrayList<Order>();
+      
+      while (rs.next()) {
+        list.add(new Order(rs));
+      }
+      return list;
+    } catch (SQLException ex) {
+      CommonTask.log(Level.SEVERE, ex, ex.getMessage());
+    }
+    return null;
+  }
+  // public static boolean create_order(
+  //     String order_name,
+  //     String order_category,
+  //     Double order_price,
+  //     int order_need_space,
+  //     int order_storage) {
+  //   try {
+  //     Connection source = db.makeConnections();
+  //     PreparedStatement st = source.prepareStatement(
+  //         "INSERT INTO `Product` (`name`,`category`,`quantity`,`price`,`need_space`,`expiry_date`,`storage_id`) VALUES (?,?,?,?,?,?,?)");
+  //     st.setString(1, product_name);
+  //     st.setString(2, product_category);
+  //     st.setInt(3, product_quantity);
+  //     st.setDouble(4, product_price);
+  //     st.setInt(5, product_need_space);
+  //     st.setDate(6, Date.valueOf(product_expiry_date.toLocalDate()));
+  //     st.setInt(7, product_storage);
+  //     return st.execute();
+  //   } catch (SQLException ex) {
+  //     CommonTask.log(Level.SEVERE, ex, ex.getMessage());
+  //   }
+  //   return false;
+  // }
+  
   public long getId() {
     return id;
   }
@@ -52,6 +111,12 @@ public class Order {
 
   public void setInventoryId(long inventoryId) {
     this.inventoryId = inventoryId;
+  }
+
+  @Override
+  public String toString() {
+    return "Order [id=" + id + ", type=" + type + ", coupen=" + coupen + ", status=" + status + ", inventoryId="
+        + inventoryId + "]";
   }
 
 }

@@ -1,11 +1,7 @@
 .root {
-    /* -fx-background-image:url('../assets/picture/welcome_window_3.png'); */
-    /* -fx-background-size: cover; */
-    -fx-background-image:url('../assets/picture/welcome_window_3.png');
+    -fx-background-image:url('../assets/picture/welcome_window.png');
     -fx-background-size: cover;
 }
-/* .welcome_window{
-} */
 .jfx-text-field {
 -fx-prompt-text-fill: #ffffff;
 -fx-text-fill: #ffffff;

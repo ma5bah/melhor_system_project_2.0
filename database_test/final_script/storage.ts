@@ -1,7 +1,7 @@
-import { PrismaClient, product_category } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { prisma } from "../script";
 
-export async function create_storage(name: string) {
+export async function create_storage(name:string) {
 
 
 
@@ -9,20 +9,20 @@ export async function create_storage(name: string) {
 
         return await prisma.storage.create({
             data: {
-                name: "general",
+                name: name,
                 address: "No Where",
                 capacity: 100,
-                category: product_category.general,
+                category: "main",
                 inventory: {
                     connect: {
-                        id: 0,
+                        id: 1,
                     }
                 },
 
             }
         })
     } catch (error) {
-
+        console.error(error)
 
     }
 

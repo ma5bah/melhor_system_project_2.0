@@ -110,6 +110,7 @@ public class login_registration_controller implements Initializable {
     private void login_button_clicked() {
        
         try {
+            
             if (check_login_info()) {
                 CommonTask.showAlert(AlertType.ERROR, "Incomplete information",
                         "Necessary infornmation must be provided");

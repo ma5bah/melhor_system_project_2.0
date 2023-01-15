@@ -1,5 +1,13 @@
 package BackEnd.database_schema;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+
+import BackEnd.CommonTask;
+import BackEnd.db;
 
 public class Storage {
 
@@ -10,7 +18,56 @@ public class Storage {
   private String category;
   private long inventory_id;
 
+  
+    public Storage(ResultSet rs) {
+      try {
+  
+        this.setId(rs.getLong("id"));
+        this.setName(rs.getString("name"));
+        this.setAddress(rs.getString("address"));
+        this.setCapacity(rs.getInt("capacity"));
+        this.setInventory_id(rs.getInt("inventory_id"));
+  
+      } catch (SQLException e) {
+        throw new RuntimeException(e);
+      }
+    }
+  public static Storage find_storage(String name) {
+    try {
+      Connection source = db.makeConnections();
+      PreparedStatement st = source.prepareStatement("SELECT * FROM `Storage` WHERE (`Storage`.`name` = ?)");
+      st.setString(1, name);
+      ResultSet rs = st.executeQuery();
+      while (rs.next()) {
+        if (rs.getString("id") != null) {
+          return new Storage(rs);
+        }
+      }
+    } catch (SQLException ex) {
+      CommonTask.log(Level.SEVERE, ex, ex.getMessage());
+      return null;
+    }
+    return null;
+  }
 
+  public static Storage create_storage() {
+    try {
+      Storage ret=find_storage("main");
+      if(ret!=null){
+        return ret; 
+      }
+      Connection source = db.makeConnections();
+      PreparedStatement st = source.prepareStatement(
+          "INSERT INTO `Storage` (`name`) VALUES ('main')");
+      st.execute();
+      return find_storage("main");
+
+    } catch (SQLException ex) {
+      throw new RuntimeException(ex);
+    }
+  }
+
+  
   public long getId() {
     return id;
   }

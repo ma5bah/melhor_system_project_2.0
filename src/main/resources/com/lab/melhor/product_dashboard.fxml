@@ -15,7 +15,7 @@
    <children>
       <Pane prefHeight="554.0" prefWidth="793.0">
          <children>
-            <TextField layoutX="590.0" layoutY="47.0" prefHeight="27.0" prefWidth="183.0" promptText="Search Product" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+            <TextField alignment="CENTER" layoutX="590.0" layoutY="47.0" prefHeight="27.0" prefWidth="183.0" promptText="Search Product" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
             <Label layoutX="57.0" layoutY="25.0" text="Products" textFill="#e7e5e5">
                <font>
                   <Font size="24.0" />
@@ -40,35 +40,6 @@
                   </VBox>
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" layoutX="45.0" layoutY="178.0" prefHeight="42.0" prefWidth="712.0" spacing="80.0" style="-fx-background-color: #02030A;">
-               <children>
-                  <Label text="Product Name" textFill="#e7e5e5">
-                     <HBox.margin>
-                        <Insets left="50.0" />
-                     </HBox.margin>
-                  </Label>
-                  <Label text="Quantity" textFill="#e7e5e5">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Label>
-                  <Label text="Expiry Date" textFill="#e7e5e5">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Label>
-                  <Label text="Price" textFill="#e7e5e5">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Label>
-                  <Label text="Status" textFill="#e7e5e5">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Label>
-               </children>
-            </HBox>
             <ScrollPane layoutX="14.0" layoutY="232.0" prefHeight="320.0" prefWidth="746.0" stylesheets="@../../../styles/dashboard.css">
                <content>
                   <VBox fx:id="scrollPnItems" prefHeight="318.0" prefWidth="744.0" spacing="5.0" style="-fx-background-color: #02030A;">
@@ -83,6 +54,31 @@
                   <Font size="18.0" />
                </font>
             </JFXButton>
+            <Pane layoutX="36.0" layoutY="180.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="99.0" text="Product Name" textFill="#e7e5e5" />
+               </children>
+            </Pane>
+            <Pane fx:id="product_category_pane" layoutX="211.0" layoutY="180.0" onMouseEntered="#search_by_category_on_mouse_entered" onMouseExited="#search_by_category_on_mouse_exited">
+               <children>
+                  <Label fx:id="product_category_label" prefHeight="0.0" prefWidth="48.0" text="Category" textFill="#e7e5e5" />
+               </children>
+            </Pane>
+            <Pane layoutX="340.0" layoutY="180.0">
+               <children>
+                  <Label text="Expiry Date" textFill="#e7e5e5" />
+               </children>
+            </Pane>
+            <Pane layoutX="509.0" layoutY="180.0">
+               <children>
+                  <Label text="Price" textFill="#e7e5e5" />
+               </children>
+            </Pane>
+            <Pane layoutX="647.0" layoutY="180.0">
+               <children>
+                  <Label text="Quantity" textFill="#e7e5e5" />
+               </children>
+            </Pane>
          </children>
       </Pane>
    </children>

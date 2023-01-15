@@ -2,6 +2,8 @@ package BackEnd;
 
 import BackEnd.database_schema.Employee;
 import BackEnd.database_schema.Inventory;
+import BackEnd.database_schema.Product;
+import BackEnd.database_schema.Storage;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -46,15 +48,16 @@ public class db {
         // System.out.println(signup("masbahuddin64@gmail.com", "123456",
         // "01311807889"));
         // login("masbahuddin64@gmail.com", "123456");
+       
         closeConnections();
     }
 
     /*
-     * INSERT INTO `test`.`Storage`
+     * INSERT INTO `Storage`
      * (`id`,`name`,`address`,`capacity`,`category`,`inventory_id`) VALUES
      * (?,?,?,?,?,?)
      * 
-     * INSERT INTO `test`.`Product`
+     * INSERT INTO `Product`
      * (`id`,`name`,`category`,`quantity`,`price`,`need_space`,`expiry_date`,`
      * storage_id`) VALUES (?,?,?,?,?,?,?,?)
      * [null,"don","general",100,12.00000000000000,1.
@@ -80,6 +83,7 @@ public class db {
     public static void init_db() {
         makeConnections();
         inventory = Inventory.create_inventory();
+        Storage.create_storage();
     }
 
     public static Connection makeConnections() {
@@ -92,7 +96,7 @@ public class db {
             //// props.setProperty("password", PASSWORD);
             // props.setProperty("tcpKeepAlive","true");
             // props.setProperty("ssl", "true");
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            // Class.forName("com.mysql.cj.jdbc.Driver");
 
             // source=DriverManager.getConnection("postgresql://192.168.0.107:5432/test");
             source = DriverManager.getConnection("jdbc:mysql://root@localhost:3306/test");

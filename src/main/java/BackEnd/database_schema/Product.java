@@ -6,14 +6,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.logging.Level;
 
 import BackEnd.CommonTask;
-import database.db;
+import BackEnd.db;
 
 public class Product {
-
+  
   private long id;
   private String name;
   private String category;
@@ -38,49 +40,56 @@ public class Product {
     }
   }
 
-  public static Product create_product(
+  public static boolean create_product(
       String product_name,
       String product_category,
       Double product_price,
       int product_need_space,
-      int product_quatity,
-      Timestamp product_expiry_date,
+      int product_quantity,
+      LocalDateTime product_expiry_date,
       int product_storage) {
     try {
-      Connection source = db.get_connection();
+      Connection source = db.makeConnections();
       PreparedStatement st = source.prepareStatement(
           "INSERT INTO `Product` (`name`,`category`,`quantity`,`price`,`need_space`,`expiry_date`,`storage_id`) VALUES (?,?,?,?,?,?,?)");
       st.setString(1, product_name);
       st.setString(2, product_category);
-      st.setInt(3, product_quatity);
+      st.setInt(3, product_quantity);
       st.setDouble(4, product_price);
       st.setInt(5, product_need_space);
-      st.setDate(6, new Date(product_expiry_date.getTime()));
+      st.setDate(6, Date.valueOf(product_expiry_date.toLocalDate()));
       st.setInt(7, product_storage);
-      ResultSet rs = st.executeQuery();
-      rs.next();
-      return new Product(rs);
+      return st.execute();
     } catch (SQLException ex) {
       CommonTask.log(Level.SEVERE, ex, ex.getMessage());
     }
-    return null;
+    return false;
   }
 
-  public static Product get_all_product() {
+  public static ArrayList<Product> get_all_product() {
     try {
-      Connection source = db.get_connection();
+      Connection source = db.makeConnections();
       PreparedStatement st = source.prepareStatement(
           "SELECT * FROM `Product`");
       ResultSet rs = st.executeQuery();
+      ArrayList<Product> list=new ArrayList<Product>();
+      
       while (rs.next()) {
-        System.out.println(new Product(rs).toString());
+        list.add(new Product(rs));
       }
+      return list;
     } catch (SQLException ex) {
       CommonTask.log(Level.SEVERE, ex, ex.getMessage());
     }
     return null;
   }
-
+  public static ArrayList<String> get_category(){
+    ArrayList<String> list =new ArrayList<String>();
+    list.add("main");
+    list.add("book");
+    list.add("electronics");
+    return list;
+  }
   public long getId() {
     return id;
   }
@@ -143,6 +152,12 @@ public class Product {
 
   public void setNeedSpace(double need_space) {
     this.need_space = need_space;
+  }
+
+  @Override
+  public String toString() {
+    return "Product [id=" + id + ", name=" + name + ", category=" + category + ", quantity=" + quantity + ", price="
+        + price + ", expiry_date=" + expiry_date + ", storage_id=" + storage_id + ", need_space=" + need_space + "]";
   }
 
 }

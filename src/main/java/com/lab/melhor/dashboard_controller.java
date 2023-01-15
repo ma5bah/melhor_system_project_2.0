@@ -21,6 +21,7 @@ import java.util.logging.Level;
 
 import BackEnd.CommonTask;
 import BackEnd.db;
+import BackEnd.database_schema.Product;
 
 public class dashboard_controller implements Initializable {
     @FXML
@@ -61,6 +62,7 @@ public class dashboard_controller implements Initializable {
                 App.setRoot("login_registration");
                 return;
             }
+            System.out.println(Product.get_all_product().size());
             employee_name.setText(db.getEmployee().getName());
             employee_dp.setImage(new Image(new File(db.getEmployee().getDp()).getAbsolutePath()));
             // System.out.println(db.getEmployee().getDp());
@@ -70,8 +72,7 @@ public class dashboard_controller implements Initializable {
             main_stack_pane.getChildren().addAll(new_panal);
 
         } catch (IOException e) {
-            System.out.println("GONE");
-            e.printStackTrace();
+            CommonTask.log(Level.SEVERE, e, e.getLocalizedMessage());
         }
 
     }
