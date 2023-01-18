@@ -33,8 +33,9 @@ public class App extends Application {
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
-    static void set_root_with_resource(String fxml,ResourceBundle resourses) throws IOException {
-        scene.setRoot(load_fxml_with_resource(fxml,resourses));
+
+    static void set_root_with_resource(String fxml, ResourceBundle resourses) throws IOException {
+        scene.setRoot(load_fxml_with_resource(fxml, resourses));
     }
 
     static void slide_from_right_side(Parent root_panal, String fxml) throws IOException {
@@ -49,12 +50,11 @@ public class App extends Application {
     }
 
     static void login_registration(Boolean login_state) throws IOException {
-        ResourceBundle state;
-        state = new ResourceBundle() {
+        ResourceBundle state = new ResourceBundle() {
             @Override
             protected Object handleGetObject(String key) {
                 if ("login_state".equals(key)) {
-                
+
                     if (login_state == true) {
                         return Boolean.TRUE;
                     }
@@ -69,13 +69,14 @@ public class App extends Application {
             }
 
         };
-        set_root_with_resource("login_registration",state);
+        set_root_with_resource("login_registration", state);
     }
 
-    private static Parent load_fxml_with_resource(String fxml,ResourceBundle resourses) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"),resourses);
+    private static Parent load_fxml_with_resource(String fxml, ResourceBundle resourses) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"), resourses);
         return fxmlLoader.load();
     }
+
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();

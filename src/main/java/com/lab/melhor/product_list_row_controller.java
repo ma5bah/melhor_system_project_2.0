@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -36,24 +37,55 @@ public class product_list_row_controller implements Initializable {
 
     @FXML
     HBox item_box;
-
+    ResourceBundle saved_resources;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // System.out.print("From Item : ");
         item_name.setText(resources.getString("item_name"));
+        // item_name.setText(resources.getString("price"));
+        // item_name.setText(resources.getString("category"));
+        // item_name.setText(resources.getString("available_quantity"));
         // this.item_id=Integer.parseInt( resources.getString("item_id"));
-        // item_name.setText(resources.getString("item_expiry_date"));
-        // item_name.setText(resources.getString("item_category"));
-        // item_name.setText(resources.getString("item_price"));
-        // item_name.setText(resources.getString("item_quantity"));
+        this.saved_resources=resources;
+
     }
 
     @FXML
     private void show_product() {
-        // TODO make a slide show.
-        // App.slide_from_right_side("product_details");
         try {
-            Parent slide_show_panal = FXMLLoader.load(App.class.getResource("product_details.fxml"));
+            // ResourceBundle state = new ResourceBundle() {
+            //     @Override
+            //     protected Object handleGetObject(String key) {
+            //         if (key == "item_name") {
+            //             return saved_resources.getString("item_name");
+            //         }
+            //         if (key == "item_id") {
+            //             return saved_resources.getString("item_id");
+            //         }
+            //         if (key == "item_category") {
+            //             return saved_resources.getString("item_category");
+            //         }
+            //         if (key == "item_price") {
+            //             return saved_resources.getString("item_price");
+            //         }
+            //         if (key == "item_expiry_date") {
+            //             return saved_resources.getString("item_expiry_date");
+            //         }
+            //         if (key == "item_quantity") {
+            //             return saved_resources.getString("item_quantity");
+            //         }
+                    
+            //         throw new UnsupportedOperationException("Not enumeration supported yet.");
+            //     }
+    
+            //     @Override
+            //     public Enumeration<String> getKeys() {
+            //         return null;
+            //     }
+    
+            // };
+            
+            Parent slide_show_panal = FXMLLoader.load(App.class.getResource("product_details.fxml"),this.saved_resources);
             AnchorPane root_panal = (AnchorPane) item_box.getScene().getRoot();
             slide_show_panal.setLayoutX(960);
             ArrayList<Node> item = new ArrayList<>();
@@ -99,7 +131,7 @@ public class product_list_row_controller implements Initializable {
             root_panal.getChildren().removeAll(item);
 
             root_panal.getChildren().addAll(invisible_panal, slide_show_panal);
-            System.out.println(root_panal.getChildren().get(2).getLayoutX());
+            // System.out.println(root_panal.getChildren().get(2).getLayoutX());
         } catch (IOException e) {
             e.printStackTrace();
         }

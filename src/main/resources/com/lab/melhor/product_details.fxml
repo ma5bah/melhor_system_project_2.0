@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -11,30 +11,41 @@
 <AnchorPane fx:id="root_product_panal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="300.0" style="-fx-background-color: #05071F;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lab.melhor.product_details_controller">
    <children>
       <ImageView fx:id="product_image" fitHeight="150.0" fitWidth="200.0" layoutX="50.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
-      <JFXButton layoutX="50.0" layoutY="444.0" prefHeight="35.0" prefWidth="200.0" style="-fx-background-color: #0f9d58;" text="Add to cart!">
+      <JFXButton layoutX="50.0" layoutY="476.0" prefHeight="35.0" prefWidth="200.0" style="-fx-background-color: #0f9d58;" text="Add to Order!">
          <font>
             <Font name="SansSerif Regular" size="18.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="50.0" layoutY="497.0" prefHeight="35.0" prefWidth="200.0" style="-fx-background-color: #0f9d58;" text="BUY NOW!">
+      <Text fx:id="name" fill="#0f9d58" layoutX="50.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NAME" wrappingWidth="200.0">
          <font>
-            <Font name="SansSerif Regular" size="18.0" />
-         </font>
-      </JFXButton>
-      <Text fx:id="name_text" fill="#0f9d58" layoutX="50.0" layoutY="276.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NAME" textAlignment="CENTER" wrappingWidth="200.0">
-         <font>
-            <Font name="SansSerif Regular" size="18.0" />
+            <Font name="SansSerif Regular" size="17.0" />
          </font>
       </Text>
-      <Label fx:id="description_text" alignment="CENTER" layoutX="50.0" layoutY="288.0" prefHeight="150.0" prefWidth="200.0" style="-fx-text-alignment: center;" text="DESCRIPTION" textAlignment="CENTER" textFill="#0f9d58">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
       <ImageView fitHeight="21.0" fitWidth="22.0" layoutX="14.0" layoutY="29.0" onMouseClicked="#close_me" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../assets/svg/right-arrow.png" />
          </image>
       </ImageView>
+      <Text fx:id="category" fill="#0f9d58" layoutX="50.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Category" wrappingWidth="200.0">
+         <font>
+            <Font name="SansSerif Regular" size="17.0" />
+         </font>
+      </Text>
+      <Text fx:id="price" fill="#0f9d58" layoutX="50.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="price" wrappingWidth="200.0">
+         <font>
+            <Font name="SansSerif Regular" size="17.0" />
+         </font>
+      </Text>
+      <Text fx:id="expiry_date" fill="#0f9d58" layoutX="50.0" layoutY="406.0" strokeType="OUTSIDE" strokeWidth="0.0" text="expiry_date" wrappingWidth="200.0">
+         <font>
+            <Font name="SansSerif Regular" size="17.0" />
+         </font>
+      </Text>
+      <Spinner fx:id="product_quantity" editable="true" layoutX="50.0" layoutY="426.0" prefHeight="37.0" prefWidth="200.0" />
+      <Text fx:id="available_quantity" fill="#0f9d58" layoutX="50.0" layoutY="356.0" strokeType="OUTSIDE" strokeWidth="0.0" text="expiry_date" wrappingWidth="200.0">
+         <font>
+            <Font name="SansSerif Regular" size="17.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

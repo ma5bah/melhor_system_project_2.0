@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
@@ -15,7 +16,7 @@
    <children>
       <Pane prefHeight="554.0" prefWidth="793.0">
          <children>
-            <TextField alignment="CENTER" layoutX="590.0" layoutY="47.0" prefHeight="27.0" prefWidth="183.0" promptText="Search Product" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+            <TextField fx:id="search_product_field" alignment="CENTER" layoutX="590.0" layoutY="47.0" onKeyReleased="#filter_product" prefHeight="27.0" prefWidth="183.0" promptText="Search Product" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em; -fx-text-fill: #ffffff;" />
             <Label layoutX="57.0" layoutY="25.0" text="Products" textFill="#e7e5e5">
                <font>
                   <Font size="24.0" />
@@ -59,9 +60,9 @@
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="99.0" text="Product Name" textFill="#e7e5e5" />
                </children>
             </Pane>
-            <Pane fx:id="product_category_pane" layoutX="211.0" layoutY="180.0" onMouseEntered="#search_by_category_on_mouse_entered" onMouseExited="#search_by_category_on_mouse_exited">
+            <Pane fx:id="product_category_pane" layoutX="186.0" layoutY="180.0"  prefHeight="27.0" prefWidth="123.0">
                <children>
-                  <Label fx:id="product_category_label" prefHeight="0.0" prefWidth="48.0" text="Category" textFill="#e7e5e5" />
+                  <ComboBox fx:id="product_category" onHiding="#filter_category" prefHeight="25.0" prefWidth="122.0" promptText="Category" />
                </children>
             </Pane>
             <Pane layoutX="340.0" layoutY="180.0">

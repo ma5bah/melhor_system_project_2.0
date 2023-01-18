@@ -3,7 +3,7 @@ import { Logger } from "@nestjs/common";
 import { create_employee, employee_login } from "./final_script/emloyee";
 import { create_inventory } from "./final_script/inventory";
 import { create_product, get_all_product } from "./final_script/product";
-import { create_storage } from "./final_script/storage";
+import { create_order } from "./final_script/order";
 export const prisma = new PrismaClient({
   log: [
     {
@@ -24,7 +24,7 @@ async function main() {
     // await employee_login();
     // await create_product("don");
     // await get_all_product();
-    await create_storage("main")
+    await create_order();
   } catch (error) {
     console.error("ERROR : ", error);
   }
@@ -47,3 +47,4 @@ prisma.$on("query", async (evt) => {
   //   console.log("Query: " + evt.query + "\nParams: " + evt.params);
   //   console.log("Duration: " + evt.duration + "ms");
 });
+

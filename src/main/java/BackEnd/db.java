@@ -2,6 +2,7 @@ package BackEnd;
 
 import BackEnd.database_schema.Employee;
 import BackEnd.database_schema.Inventory;
+import BackEnd.database_schema.Order;
 import BackEnd.database_schema.Product;
 import BackEnd.database_schema.Storage;
 
@@ -20,6 +21,7 @@ public class db {
 
     private static Employee employee = null;
     private static Inventory inventory = null;
+    private static Order tmp_order = null;
 
     public static boolean isEmployeeAvailable() {
         return employee != null;
@@ -83,6 +85,7 @@ public class db {
     public static void init_db() {
         makeConnections();
         inventory = Inventory.create_inventory();
+        tmp_order=new Order();
         Storage.create_storage();
     }
 

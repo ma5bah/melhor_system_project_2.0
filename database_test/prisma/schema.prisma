@@ -20,16 +20,7 @@ model Inventory {
   order_data    Order[]
 }
 
-enum product_category {
-  paper_made
-  liquid
-  general
-}
 
-enum type_of_employee {
-  admin
-  manager
-}
 
 model Employee {
   id       Int    @id @default(autoincrement())
@@ -97,19 +88,11 @@ model Supplier {
   product_data ProductAndSupplier[]
 }
 
-enum type_of_order {
-  buy
-  sell
-}
 
-enum type_of_order_status {
-  pending
-  processing
-  delivered
-}
+
 
 model ProductAndOrder {
-  product_quantity Float
+  product_quantity Int
 
   // mapping
   product    Product @relation(fields: [product_id], references: [id])

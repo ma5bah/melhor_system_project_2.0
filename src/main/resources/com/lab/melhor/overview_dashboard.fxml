@@ -17,7 +17,7 @@
             </Label>
             <VBox alignment="CENTER" layoutX="71.0" layoutY="120.0" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #003153; -fx-background-radius: 2em;">
                <children>
-                  <Label text="22000" textFill="#0bda51">
+                  <Label fx:id="total_order_count" text="22000" textFill="#0bda51">
                      <font>
                         <Font name="System Bold" size="26.0" />
                      </font>

@@ -11,6 +11,8 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -20,25 +22,43 @@ public class product_details_controller implements Initializable {
     @FXML
     private AnchorPane root_product_panal;
     @FXML
-    private Text name_text;
+    private Text name;
     @FXML
-    private Label description_text;
+    private Text category;
+    @FXML
+    private Text price;
+    @FXML
+    private Text expiry_date;
+    @FXML
+    private Text available_quantity;
+    @FXML
+    private Spinner<Integer> product_quantity;
+
     @FXML
     private ImageView product_image;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        product_quantity.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0,10000000));
+        // System.out.println(resources);
         try {
-            if (resources.getString("name_of_product") != null) {
-                name_text.setText(resources.getString("name_of_product"));
-            } else {
-                name_text.setText("Product Name is not available");
+            System.out.println("q "+resources.getString("item_expiry_date"));
+            if (resources.getString("item_name") != null) {
+                name.setText("Name: "+resources.getString("item_name"));
+            } 
+            if (resources.getString("item_price") != null) {
+                price.setText("Price: "+resources.getString("item_price"));
             }
-            if (resources.getString("description_of_product") != null) {
-                description_text.setText(resources.getString("description_of_product"));
-            } else {
-                name_text.setText("Product Name is not available");
-            }
+            if (resources.getString("item_category") != null) {
+                category.setText("Category: "+resources.getString("item_category"));
+            } 
+            if (resources.getString("item_quantity") != null) {
+                available_quantity.setText("Available: "+resources.getString("item_quantity")+" piece");
+            } 
+            if (resources.getString("item_expiry_date") != null) {
+                expiry_date.setText("Wil be expired: "+resources.getString("item_expiry_date"));
+            } 
+            
 
         } catch (NullPointerException | MissingResourceException e) {
             e.getStackTrace();

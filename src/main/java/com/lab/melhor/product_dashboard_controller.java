@@ -1,21 +1,29 @@
 package com.lab.melhor;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXButton;
@@ -30,43 +38,51 @@ public class product_dashboard_controller implements Initializable {
     @FXML
     private Pane product_category_pane;
     @FXML
-    private Label product_category_label;
-    TextField search_filter_field;
+    private ComboBox<String> product_category;
+    @FXML
+    private TextField search_product_field;
+    // TextField search_filter_field;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        search_filter_field = new TextField();
+        // search_filter_field = new TextField();
+        ObservableList<String> category = FXCollections.observableArrayList();
+        category.addAll(Product.get_category());
+        product_category.setItems(category);
 
-        search_filter_field.setStyle("-fx-background-color: #02030A");
-        search_filter_field.setStyle("-fx-border-color:  #B7C3D7");
-        search_filter_field.setStyle("-fx-border-radius:  2em");
-        // search_filter_field.setOnMouseExited(evt->{
-        // search_by_category_on_mouse_exited();
-        // });
         ArrayList<Product> list = Product.get_all_product();
+        show_product(list);
+    }
+
+    void show_product(ArrayList<Product> list){
+        // if(list==null){
+        //     return;
+        // }
         Node[] nodes = new Node[list.size()];
         for (int i = 0; i < list.size(); i++) {
             try {
-
                 final int j = i;
                 ResourceBundle r = new ResourceBundle() {
-
                     @Override
                     protected Object handleGetObject(String key) {
                         if (key == "item_name") {
                             return list.get(j).getName();
                         }
+                        if (key == "item_id") {
+                            return String.valueOf(list.get(j).getId());
+                        }
                         if (key == "item_category") {
                             return list.get(j).getCategory();
                         }
                         if (key == "item_price") {
-                            return list.get(j).getPrice();
+                            return String.valueOf( list.get(j).getPrice());
                         }
                         if (key == "item_expiry_date") {
-                            return new Date(list.get(j).getExpiryDate().getTime());
+                            return new Date(list.get(j).getExpiryDate().getTime()).toString();
                         }
                         if (key == "item_quantity") {
-                            return list.get(j).getQuantity();
+                            
+                            return String.valueOf(list.get(j).getQuantity());
                         }
                         throw new UnsupportedOperationException("Not enumeration supported yet.");
                     }
@@ -77,11 +93,7 @@ public class product_dashboard_controller implements Initializable {
                     }
                 };
                 nodes[i] = FXMLLoader.load(getClass().getResource("product_list_row.fxml"), r);
-                // nodes[i].getController();
-                // FXMLLoader.
-                // nodes[i]
                 // give the items some effect
-
                 nodes[i].setOnMouseEntered(event -> {
                     nodes[j].setStyle("-fx-background-color : #0A0E3F");
                 });
@@ -93,18 +105,27 @@ public class product_dashboard_controller implements Initializable {
                 e.printStackTrace();
             }
         }
-
     }
-
+    void remove_all_product(){
+        ArrayList<Node> removal_list = new ArrayList<Node>();
+        for (int i = 0; i < scrollPnItems.getChildren().size(); i++) {
+            removal_list.add(scrollPnItems.getChildren().get(i));
+            // if (scrollPnItems.getChildren().get(i).getId() == "item_box") {
+            //     System.out.println(scrollPnItems.getChildren().get(i).getId());
+            // }
+        }
+        scrollPnItems.getChildren().removeAll(removal_list);
+        // System.out.println(scrollPnItems.getChildren().removeAll(removal_list)?"Removed all product":"Failed");
+    }
     @FXML
     public void search_by_category_on_mouse_exited() {
-        String searched_text = search_filter_field.getText();
+        // String searched_text = search_filter_field.getText();
 
-        if (product_category_pane.getChildren().contains(search_filter_field)) {
-            product_category_pane.getChildren().remove(search_filter_field);
-            product_category_label.setText(searched_text);
-            // product_category_pane.getChildren().remove(search_filter_field);
-        }
+        // if (product_category_pane.getChildren().contains(search_filter_field)) {
+        // product_category_pane.getChildren().remove(search_filter_field);
+        // product_category_label.setText(searched_text);
+        // // product_category_pane.getChildren().remove(search_filter_field);
+        // }
         // product_category_pane.getChildren().add(new
         // TextField(search_filter_field.getText()));
         // product_category_pane.getChildren().remove(search_filter_field);
@@ -113,14 +134,26 @@ public class product_dashboard_controller implements Initializable {
     }
 
     @FXML
-    public void search_by_category_on_mouse_entered() {
-        System.out.println(product_category_pane.getChildren().contains(search_filter_field));
-        if (!product_category_pane.getChildren().contains(search_filter_field)) {
-            // product_category_pane.getChildren().remove(product_category_label);
-            product_category_pane.getChildren().add(search_filter_field);
+    public void filter_product(KeyEvent evt){
+        // System.out.println(evt);
+        // if(evt instanceof event)
+        // System.out.println(evt.getCode()==KeyCode.ENTER);
+        if(evt.getCode()==KeyCode.ENTER){
+            if(search_product_field.getText()!=""){
+                remove_all_product();
+                show_product(Product.get_all_product_by_name(search_product_field.getText()));
+                // System.out.println(search_product_field.getText());
+            }
         }
+        // System.out.println(evt.get);
+        // if(search_product_field.getCharacters()
     }
-
+    
+    @FXML
+    public void filter_category(){
+        remove_all_product();
+        show_product(Product.get_all_product_by_category(product_category.getValue()));
+    }
     @FXML
     private void open_add_product_window() {
         // App.slide_from_right_side("product_details");

@@ -9,13 +9,14 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale.Category;
 import java.util.logging.Level;
 
 import BackEnd.CommonTask;
 import BackEnd.db;
 
 public class Product {
-  
+
   private long id;
   private String name;
   private String category;
@@ -72,8 +73,8 @@ public class Product {
       PreparedStatement st = source.prepareStatement(
           "SELECT * FROM `Product`");
       ResultSet rs = st.executeQuery();
-      ArrayList<Product> list=new ArrayList<Product>();
-      
+      ArrayList<Product> list = new ArrayList<Product>();
+
       while (rs.next()) {
         list.add(new Product(rs));
       }
@@ -83,13 +84,59 @@ public class Product {
     }
     return null;
   }
-  public static ArrayList<String> get_category(){
-    ArrayList<String> list =new ArrayList<String>();
+
+  public static ArrayList<Product> get_all_product_by_category(String _category) {
+    try {
+      Connection source = db.makeConnections();
+      PreparedStatement st = source.prepareStatement(
+          "SELECT * FROM `Product` WHERE `category`=?");
+      st.setString(1, _category);
+      ResultSet rs = st.executeQuery();
+      ArrayList<Product> list = new ArrayList<Product>();
+
+      while (rs.next()) {
+        list.add(new Product(rs));
+      }
+      return list;
+    } catch (SQLException ex) {
+      CommonTask.log(Level.SEVERE, ex, ex.getMessage());
+    }
+    return null;
+  }
+  public static ArrayList<Product> get_all_product_by_name(String _name) {
+    try {
+      Connection source = db.makeConnections();
+      PreparedStatement st = source.prepareStatement(
+          "SELECT * FROM `Product` WHERE `name` LIKE '%"+_name+"%';");
+      // st.setString(1, _name);
+      // System.out.println()
+      ResultSet rs = st.executeQuery();
+      // System.out.println(rs.getStatement());
+      ArrayList<Product> list = new ArrayList<Product>();
+
+      while (rs.next()) {
+        // System.out.println(rs.getString("name"));
+        list.add(new Product(rs));
+      }
+      return list;
+    } catch (SQLException ex) {
+      CommonTask.log(Level.SEVERE, ex, ex.getMessage());
+    }
+    return null;
+  }
+
+  public static ArrayList<String> get_category() {
+    ArrayList<String> list = new ArrayList<String>();
     list.add("main");
     list.add("book");
-    list.add("electronics");
+    list.add("python");
+    list.add("c++");
+    list.add("java");
+    list.add("ml");
+    list.add("ds");
     return list;
   }
+
   public long getId() {
     return id;
   }

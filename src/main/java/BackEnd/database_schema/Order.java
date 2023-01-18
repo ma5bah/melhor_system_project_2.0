@@ -11,12 +11,43 @@ import BackEnd.CommonTask;
 import BackEnd.db;
 
 public class Order {
-
+  private ArrayList<Long> product_ids;
   private long id;
   private String type;
   private String coupen;
   private String status;
   private long inventoryId;
+  public Order() {
+  }
+  public void add_product_in_order(long _id){
+    product_ids.add(_id);
+  }
+//   [Nest] 14132  - 01/18/2023, 11:01:11 PM   DEBUG [PARAM] [1]
+// [Nest] 14132  - 01/18/2023, 11:01:11 PM     LOG [QUERY] INSERT INTO `test`.`Order` (`id`,`type`,`coupen`,`status`,`inventory_id`) VALUES (?,?,?,?,?)
+// [Nest] 14132  - 01/18/2023, 11:01:11 PM   DEBUG [PARAM] [null,"pending1"," ","pending2",1]
+// [Nest] 14132  - 01/18/2023, 11:01:11 PM     LOG [QUERY] INSERT INTO `test`.`ProductAndOrder` (`order_id`,`product_id`,`product_quantity`) VALUES (?,?,?), (?,?,?)     
+// [Nest] 14132  - 01/18/2023, 11:01:11 PM   DEBUG [PARAM] [2,3,10.00000000000000,2,2,10.00000000000000]
+// [Nest] 14132  - 01/18/2023, 11:01:11 PM     LOG [QUERY] SELECT `test`.`Order`.`id`, `test`.`Order`.`type`, `test`.`Order`.`coupen`, `test`.`Order`.`status`, `test`.`Order`.`inventory_id` FROM `test`.`Order` WHERE `test`.`Order`.`id` = ? LIMIT ? OFFSET ?
+// [Nest] 14132  - 01/18/2023, 11:01:11 PM   DEBUG [PARAM] [2,1,0]
+// [Nest] 14132  - 01/18/2023, 11:01:11 PM     LOG [QUERY] COMMIT
+// [Nest] 14132  - 01/18/2023, 11:01:11 PM   DEBUG [PARAM] []
+  
+  public static boolean create_order(
+      String type,
+      String coupen) {
+    try {
+      Connection source = db.makeConnections();
+      PreparedStatement st = source.prepareStatement(
+          "INSERT INTO `Order` (`type`,`category`,`quantity`,`price`,`need_space`,`expiry_date`,`storage_id`) VALUES (?,?,?,?,?,?,?)");
+
+      return st.execute();
+    } catch (SQLException ex) {
+      CommonTask.log(Level.SEVERE, ex, ex.getMessage());
+    }
+    return false;
+  }
+
+ 
   public Order(ResultSet rs) {
     try {
       this.setId(rs.getLong("id"));
@@ -44,6 +75,20 @@ public class Order {
       CommonTask.log(Level.SEVERE, ex, ex.getMessage());
     }
     return null;
+  }
+  public static int count_all_order(){
+    try {
+      Connection source = db.makeConnections();
+      PreparedStatement st = source.prepareStatement(
+          "SELECT count(*) as count FROM `Order`");
+      ResultSet rs = st.executeQuery();
+      rs.next();
+      return rs.getInt("count");
+
+    } catch (SQLException ex) {
+      CommonTask.log(Level.SEVERE, ex, ex.getMessage());
+    }
+    return 0;
   }
   // public static boolean create_order(
   //     String order_name,
