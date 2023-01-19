@@ -124,7 +124,28 @@ public class Product {
     }
     return null;
   }
+  public static Product get_product_by_id(Long _id) {
+    try {
+      Connection source = db.makeConnections();
+      PreparedStatement st = source.prepareStatement(
+          "SELECT * FROM `Product` WHERE `id`=?;");
+      st.setLong(1, _id);
+      // System.out.println()
+      ResultSet rs = st.executeQuery();
+      // System.out.println(rs.getStatement());
 
+
+      while (rs.next()) {
+        // System.out.println(rs.getString("name"));
+       return new Product(rs);
+
+      }
+    } catch (SQLException ex) {
+      CommonTask.log(Level.SEVERE, ex, ex.getMessage());
+    }
+    return null;
+  }
+  
   public static ArrayList<String> get_category() {
     ArrayList<String> list = new ArrayList<String>();
     list.add("main");

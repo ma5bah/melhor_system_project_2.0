@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<StackPane prefHeight="576.0" prefWidth="790.0" style="-fx-background-color: #02030A;" stylesheets="@../../../styles/dashboard.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lab.melhor.profile_dashboard_controller">
+   <children>
+      <Pane prefHeight="554.0" prefWidth="793.0">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="515.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true" />
+            <Text fx:id="name" fill="#0f9d58" layoutX="60.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" wrappingWidth="127.0">
+               <font>
+                  <Font name="SansSerif Regular" size="17.0" />
+               </font>
+            </Text>
+            <Text fill="#0f9d58" layoutX="295.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NAME" textAlignment="CENTER" wrappingWidth="200.0">
+               <font>
+                  <Font name="SansSerif Regular" size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="role" fill="#0f9d58" layoutX="60.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Role:" wrappingWidth="127.0">
+               <font>
+                  <Font name="SansSerif Regular" size="17.0" />
+               </font>
+            </Text>
+            <Text fx:id="bio" fill="#0f9d58" layoutX="60.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bio:" wrappingWidth="127.0">
+               <font>
+                  <Font name="SansSerif Regular" size="17.0" />
+               </font>
+            </Text>
+            <Text fx:id="age" fill="#0f9d58" layoutX="60.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Age:" wrappingWidth="127.0">
+               <font>
+                  <Font name="SansSerif Regular" size="17.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+   </children>
+</StackPane>

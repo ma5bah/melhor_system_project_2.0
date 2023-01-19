@@ -21,7 +21,7 @@ public class db {
 
     private static Employee employee = null;
     private static Inventory inventory = null;
-    private static Order tmp_order = null;
+    public static Order tmp_order = null;
 
     public static boolean isEmployeeAvailable() {
         return employee != null;

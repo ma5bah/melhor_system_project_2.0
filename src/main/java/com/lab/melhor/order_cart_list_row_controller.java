@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXButton;
+
 import javafx.css.Style;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -15,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -26,11 +29,14 @@ public class order_cart_list_row_controller implements Initializable {
     private Label item_name;
     @FXML
     HBox item_box;
+    @FXML
+    Button quantity;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // System.out.print("From Item : ");
         item_name.setText(resources.getString("name"));
+        quantity.setText(resources.getString("quantity"));
         // System.out.println(resources.getString("name"));
     }
 

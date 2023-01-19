@@ -11,7 +11,7 @@
 <AnchorPane fx:id="root_product_panal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="300.0" style="-fx-background-color: #05071F;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lab.melhor.product_details_controller">
    <children>
       <ImageView fx:id="product_image" fitHeight="150.0" fitWidth="200.0" layoutX="50.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
-      <JFXButton layoutX="50.0" layoutY="476.0" prefHeight="35.0" prefWidth="200.0" style="-fx-background-color: #0f9d58;" text="Add to Order!">
+      <JFXButton layoutX="50.0" layoutY="476.0" onAction="#add_to_cart" prefHeight="35.0" prefWidth="200.0" style="-fx-background-color: #0f9d58;" text="Add to Order!">
          <font>
             <Font name="SansSerif Regular" size="18.0" />
          </font>

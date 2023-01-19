@@ -13,7 +13,7 @@
                 <Insets />
             </HBox.margin>
         </Label>
-        <Button fx:id="status" mnemonicParsing="false" prefHeight="10.0" prefWidth="60.0" style="-fx-border-color: #9d0000; -fx-border-radius: 20; -fx-background-color: transparent;" stylesheets="@../../../styles/dashboard.css" text="delete">
+        <Button fx:id="quantity" mnemonicParsing="false" prefHeight="10.0" prefWidth="60.0" style="-fx-border-color: #9d0000; -fx-border-radius: 20; -fx-background-color: transparent;" stylesheets="@../../../styles/dashboard.css" text="quantity">
             <HBox.margin>
                 <Insets />
             </HBox.margin>

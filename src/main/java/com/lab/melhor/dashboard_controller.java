@@ -47,7 +47,7 @@ public class dashboard_controller implements Initializable {
     private Button btnPanel;
 
     @FXML
-    private Button btnPackages;
+    private Button btnProfile;
 
     @FXML
     private Button btnSettings;
@@ -66,7 +66,8 @@ public class dashboard_controller implements Initializable {
             employee_name.setText(db.getEmployee().getName());
             employee_dp.setImage(new Image(new File(db.getEmployee().getDp()).getAbsolutePath()));
             // System.out.println(db.getEmployee().getDp());
-            // System.out.println(new File("src/main/resources/assets/picture/default.png").getAbsoluteFile());
+            // System.out.println(new
+            // File("src/main/resources/assets/picture/default.png").getAbsoluteFile());
             Pane new_panal = FXMLLoader.load(App.class.getResource("overview_dashboard.fxml"));
             // FXMLLoader.load(App.class.getResource("overview_dashboard.fxml"));
             main_stack_pane.getChildren().addAll(new_panal);
@@ -88,11 +89,11 @@ public class dashboard_controller implements Initializable {
     }
     // @FXML
     // public void logout(){
-    //     try {
-            
-    //     } catch (IOException e) {
-    //         CommonTask.log(Level.SEVERE, e, e.getMessage());
-    //     }
+    // try {
+
+    // } catch (IOException e) {
+    // CommonTask.log(Level.SEVERE, e, e.getMessage());
+    // }
     // }
     public void handleClicks(ActionEvent actionEvent) throws IOException {
         // for (Node iterable_element : main_stack_pane.getChildren()) {
@@ -101,10 +102,10 @@ public class dashboard_controller implements Initializable {
         // System.out.println();
         // pnlMenus.setStyle("-fx-background-color : #53639F");
         // pnlMenus.toFront();
-            if(actionEvent.getSource()==btnSignout){
-                db.logout();
+        if (actionEvent.getSource() == btnSignout) {
+            db.logout();
             App.setRoot("login_registration");
-            }
+        }
 
         if (actionEvent.getSource() == btnProducts) {
 
@@ -136,6 +137,13 @@ public class dashboard_controller implements Initializable {
 
             // pnlOrders.setStyle("-fx-background-color : #464F67");
             // pnlOrders.toFront();
+        }
+        if (actionEvent.getSource() == btnProfile) {
+            System.out.println("done");
+            Pane new_panal = new FXMLLoader(getClass().getResource("profile_dashboard.fxml")).load();
+            clear_main_stack_pane();
+            main_stack_pane.getChildren().add(new_panal);
+
         }
     }
 }
