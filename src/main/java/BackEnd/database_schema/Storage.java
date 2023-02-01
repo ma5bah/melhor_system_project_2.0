@@ -49,7 +49,20 @@ public class Storage {
     }
     return null;
   }
+  public static int count_total_space() {
+    try {
+      Connection source = db.makeConnections();
+      PreparedStatement st = source.prepareStatement(
+              "SELECT sum(`Storage`.`capacity`-(SELECT sum(`Product`.`need_space`) FROM `Product` WHERE `Product`.`storage_id`=`Storage`.`id`)) as count FROM `Storage`");
+      ResultSet rs = st.executeQuery();
+      rs.next();
+      return rs.getInt("count");
 
+    } catch (SQLException ex) {
+      CommonTask.log(Level.SEVERE, ex, ex.getMessage());
+    }
+    return 0;
+  }
   public static Storage create_storage() {
     try {
       Storage ret=find_storage("main");
@@ -58,7 +71,7 @@ public class Storage {
       }
       Connection source = db.makeConnections();
       PreparedStatement st = source.prepareStatement(
-          "INSERT INTO `Storage` (`name`) VALUES ('main')");
+          "INSERT INTO `Storage` (`name`,`address`,`capacity`,`category`,`inventory_id`) VALUES ('main','main',10000000,'grocery',1)");
       st.execute();
       return find_storage("main");
 

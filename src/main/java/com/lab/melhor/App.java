@@ -54,7 +54,6 @@ public class App extends Application {
             @Override
             protected Object handleGetObject(String key) {
                 if ("login_state".equals(key)) {
-
                     if (login_state == true) {
                         return Boolean.TRUE;
                     }

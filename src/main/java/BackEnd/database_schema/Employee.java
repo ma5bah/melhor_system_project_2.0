@@ -5,10 +5,7 @@ import javafx.util.StringConverter;
 
 import java.io.File;
 import java.net.URL;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -65,7 +62,20 @@ public class Employee extends StringConverter {
             throw new RuntimeException(e);
         }
     }
+    public static int count_employee() {
+        try {
+            Connection source = db.makeConnections();
+            PreparedStatement st = source.prepareStatement(
+                    "SELECT count(*) as count FROM `Employee`");
+            ResultSet rs = st.executeQuery();
+            rs.next();
+            return rs.getInt("count");
 
+        } catch (SQLException ex) {
+            CommonTask.log(Level.SEVERE, ex, ex.getMessage());
+        }
+        return 0;
+    }
     @Override
     public String toString() {
         return "Employee{" +

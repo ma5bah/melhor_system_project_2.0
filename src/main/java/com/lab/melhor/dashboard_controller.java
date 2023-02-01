@@ -16,6 +16,7 @@ import javafx.scene.layout.StackPane;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Path;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 
@@ -64,7 +65,8 @@ public class dashboard_controller implements Initializable {
             }
             System.out.println(Product.get_all_product().size());
             employee_name.setText(db.getEmployee().getName());
-            employee_dp.setImage(new Image(new File(db.getEmployee().getDp()).getAbsolutePath()));
+//             System.out.println(new File(db.getEmployee().getDp()).getAbsolutePath());
+            employee_dp.setImage(new Image(Path.of(new File(db.getEmployee().getDp()).getAbsolutePath()).toUri().toString()));
             // System.out.println(db.getEmployee().getDp());
             // System.out.println(new
             // File("src/main/resources/assets/picture/default.png").getAbsoluteFile());

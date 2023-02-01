@@ -102,7 +102,7 @@ public class db {
             // Class.forName("com.mysql.cj.jdbc.Driver");
 
             // source=DriverManager.getConnection("postgresql://192.168.0.107:5432/test");
-            source = DriverManager.getConnection("jdbc:mysql://root@localhost:3306/test");
+            source = DriverManager.getConnection("jdbc:mysql://root:password@localhost:3306/test");
             System.out.printf("Database is %s \n", !source.isClosed() ? "connected" : "not ok");
             System.out.printf("%s/%s \n", source.getCatalog(), source.getSchema());
             return source;

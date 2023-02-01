@@ -123,6 +123,20 @@ public class Order {
     }
     return 0;
   }
+  public static int count_pending_order() {
+    try {
+      Connection source = db.makeConnections();
+      PreparedStatement st = source.prepareStatement(
+              "SELECT count(*) as count FROM `Order` WHERE `status`='pending'");
+      ResultSet rs = st.executeQuery();
+      rs.next();
+      return rs.getInt("count");
+
+    } catch (SQLException ex) {
+      CommonTask.log(Level.SEVERE, ex, ex.getMessage());
+    }
+    return 0;
+  }
   // public static boolean create_order(
   // String order_name,
   // String order_category,

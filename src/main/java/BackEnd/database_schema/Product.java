@@ -66,7 +66,20 @@ public class Product {
     }
     return false;
   }
+  public static int count_product() {
+    try {
+      Connection source = db.makeConnections();
+      PreparedStatement st = source.prepareStatement(
+              "SELECT count(*) as count FROM `Product`");
+      ResultSet rs = st.executeQuery();
+      rs.next();
+      return rs.getInt("count");
 
+    } catch (SQLException ex) {
+      CommonTask.log(Level.SEVERE, ex, ex.getMessage());
+    }
+    return 0;
+  }
   public static ArrayList<Product> get_all_product() {
     try {
       Connection source = db.makeConnections();
