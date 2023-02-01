@@ -1,5 +1,6 @@
 package com.lab.melhor;
 
+import BackEnd.database_schema.ProductAndOrder;
 import javafx.fxml.Initializable;
 
 import java.io.IOException;
@@ -91,7 +92,16 @@ public class order_generated_order_controller implements Initializable {
     }
 
 @FXML
-public void add_to_cart(){}
+public void add_to_cart(){
+    long order_id = Order.create_order("buy", "none");
+    if(order_id!=-1){
+
+    db.tmp_order.get_product_in_order().forEach(data->{
+        ProductAndOrder.create_ordered_product(order_id,data.getKey(),data.getValue());
+    });
+    }
+
+}
 
 
 @FXML

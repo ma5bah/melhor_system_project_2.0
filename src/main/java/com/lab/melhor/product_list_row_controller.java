@@ -33,7 +33,7 @@ public class product_list_row_controller implements Initializable {
     @FXML
     private Label item_price;
     @FXML
-    private Button item_quantity;
+    private Label item_quantity;
 
     @FXML
     HBox item_box;
@@ -41,11 +41,11 @@ public class product_list_row_controller implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // System.out.print("From Item : ");
+        item_expiry_date.setText(resources.getString("item_expiry_date"));
         item_name.setText(resources.getString("item_name"));
-        // item_name.setText(resources.getString("price"));
-        // item_name.setText(resources.getString("category"));
-        // item_name.setText(resources.getString("available_quantity"));
-        // this.item_id=Integer.parseInt( resources.getString("item_id"));
+         item_price.setText(resources.getString("item_price"));
+         item_category.setText(resources.getString("item_category"));
+         item_quantity.setText(resources.getString("item_quantity"));
         this.saved_resources=resources;
 
     }

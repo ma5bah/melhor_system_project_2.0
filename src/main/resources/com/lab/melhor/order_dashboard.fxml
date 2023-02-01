@@ -24,10 +24,9 @@
                   </VBox>
                </content>
             </ScrollPane>
-            <Label layoutX="241.0" layoutY="180.0" text="Status" textFill="#e7e5e5" />
-            <Label layoutX="98.0" layoutY="180.0" text="Order Id" textFill="#e7e5e5" />
-            <Label layoutX="367.0" layoutY="180.0" text="Type" textFill="#e7e5e5" />
-            <Label layoutX="472.0" layoutY="180.0" text="Responsible" textFill="#e7e5e5" />
+            <Label layoutX="258.0" layoutY="180.0" text="Status" textFill="#e7e5e5" />
+            <Label layoutX="87.0" layoutY="180.0" text="Order Id" textFill="#e7e5e5" />
+            <Label layoutX="444.0" layoutY="180.0" text="Type" textFill="#e7e5e5" />
             <Label layoutX="600.0" layoutY="180.0" text="Total Amount" textFill="#e7e5e5" />
             <JFXButton fx:id="generated_order" layoutX="551.0" layoutY="98.0" onAction="#get_generated_order" prefHeight="55.0" prefWidth="154.0" style="-fx-background-color: #0f9d58;" text="Generated Order">
                <font>

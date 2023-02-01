@@ -23,23 +23,36 @@ import javafx.scene.layout.Pane;
 public class order_list_row_controller implements Initializable {
 
     @FXML
-    private Label item_name;
+    private Label order_id;
+
+    @FXML
+    private Label order_type;
+
+    @FXML
+    private Label order_status;
+
+    @FXML
+    private Label order_amount;
     @FXML
     HBox item_box;
+    ResourceBundle state;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // System.out.print("From Item : ");
-        item_name.setText(resources.getString("name"));
+        order_id.setText(resources.getString("order_id"));
+        order_type.setText(resources.getString("order_type"));
+        order_status.setText(resources.getString("order_status"));
+        state=resources;
+//        order_amount.setText(resources.getString("quantity"));
         // System.out.println(resources.getString("name"));
     }
-
     @FXML
     private void show_order() {
         // TODO make a slide show.
         // App.slide_from_right_side("product_details");
         try {
-            Parent slide_show_panal = FXMLLoader.load(App.class.getResource("order_details.fxml"));
+            Parent slide_show_panal = FXMLLoader.load(App.class.getResource("order_details.fxml"),this.state);
             AnchorPane root_panal = (AnchorPane) item_box.getScene().getRoot();
             slide_show_panal.setLayoutX(960);
             ArrayList<Node> item = new ArrayList<>();

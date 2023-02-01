@@ -1,8 +1,11 @@
 package com.lab.melhor;
 
 
+import BackEnd.database_schema.Order;
+import BackEnd.database_schema.Product;
 import javafx.fxml.Initializable;
 import java.net.URL;
+import java.sql.Date;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
@@ -30,30 +33,39 @@ private JFXButton generated_order;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        Node[] nodes = new Node[10];
-        for (int i = 0; i < nodes.length; i++) {
+        show_order(Order.get_all_order());
+    }
+    void show_order(ArrayList<Order> list){
+         if(list==null){
+             return;
+         }
+        Node[] nodes = new Node[list.size()];
+        for (int i = 0; i < list.size(); i++) {
             try {
-
                 final int j = i;
-                ResourceBundle r=new ResourceBundle() {
-                    
+                ResourceBundle r = new ResourceBundle() {
                     @Override
                     protected Object handleGetObject(String key) {
-                        if(key=="name"){
-                            return "masbah"+Integer.toString(j);
+                        if (key == "order_id") {
+                            return String.valueOf(list.get(j).getId());
                         }
-                        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                        if (key == "order_status") {
+                            return list.get(j).getStatus();
+                        }
+                        if (key == "order_type") {
+                            return list.get(j).getType();
+                        }
+
+                        throw new UnsupportedOperationException("Not enumeration supported yet.");
                     }
 
                     @Override
                     public Enumeration<String> getKeys() {
-                        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                        throw new UnsupportedOperationException("Not enumeration supported yet.");
                     }
                 };
-                nodes[i] = FXMLLoader.load(getClass().getResource("order_list_row.fxml"),r);
-
-
+                nodes[i] = FXMLLoader.load(getClass().getResource("order_list_row.fxml"), r);
+                // give the items some effect
                 nodes[i].setOnMouseEntered(event -> {
                     nodes[j].setStyle("-fx-background-color : #0A0E3F");
                 });
@@ -65,7 +77,6 @@ private JFXButton generated_order;
                 e.printStackTrace();
             }
         }
-
     }
 
     @FXML

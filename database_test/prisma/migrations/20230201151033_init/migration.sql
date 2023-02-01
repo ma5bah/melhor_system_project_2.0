@@ -69,7 +69,7 @@ CREATE TABLE `Supplier` (
 
 -- CreateTable
 CREATE TABLE `ProductAndOrder` (
-    `product_quantity` DOUBLE NOT NULL,
+    `product_quantity` INTEGER NOT NULL,
     `product_id` INTEGER NOT NULL,
     `order_id` INTEGER NOT NULL,
 
@@ -84,7 +84,6 @@ CREATE TABLE `Order` (
     `status` VARCHAR(191) NOT NULL,
     `inventory_id` INTEGER NOT NULL,
 
-    UNIQUE INDEX `Order_inventory_id_key`(`inventory_id`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 

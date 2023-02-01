@@ -9,6 +9,7 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import BackEnd.database_schema.Product;
+import BackEnd.db;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -42,7 +43,7 @@ public class product_add_product_controller implements Initializable {
     @FXML
     private Spinner<Integer> product_needed_space;
     @FXML
-    private Spinner<Integer> product_storage_id;
+    private ComboBox<String> product_storage_name;
     @FXML
     private DatePicker product_expiry_date;
 
@@ -52,12 +53,17 @@ public class product_add_product_controller implements Initializable {
 
 
             ObservableList<String> category = FXCollections.observableArrayList();
+            ObservableList<String> storage = FXCollections.observableArrayList();
+            for(int i=0;i<db.storage_list.size();i++){
+                storage.add(db.storage_list.get(i).getName());
+            }
             category.addAll(Product.get_category());
             product_category.setItems(category);
             product_quantity.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0,10000000));
             product_price.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(1, 100000));
             product_needed_space.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0,10000000));
-            product_storage_id.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0,10000000));
+            product_storage_name.setItems(storage);
+//            product_storage_id.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0,10000000));
         } catch (NullPointerException | MissingResourceException e) {
             e.getStackTrace();
 
@@ -93,7 +99,13 @@ public class product_add_product_controller implements Initializable {
     @FXML
     private void add_product(){
         if(check_product_details()){
-            Product.create_product(product_name.getText(), product_category.getValue(), product_price.getValue(), product_needed_space.getValue().intValue(), product_quantity.getValue().intValue(),product_expiry_date.getValue().atStartOfDay() , product_storage_id.getValue().intValue());
+            int storage_id = 0;
+            for(int i=0;i<db.storage_list.size();i++){
+                if(db.storage_list.get(i).getName()==product_storage_name.getValue()){
+                    storage_id=(int)db.storage_list.get(i).getId();
+                }
+            }
+            Product.create_product(product_name.getText(), product_category.getValue(), product_price.getValue(), product_needed_space.getValue().intValue(), product_quantity.getValue().intValue(),product_expiry_date.getValue().atStartOfDay() , storage_id);
         }
     }
 }

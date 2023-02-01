@@ -113,7 +113,7 @@ model Order {
   product_data ProductAndOrder[]
   // connection
   inventory    Inventory         @relation(fields: [inventory_id], references: [id])
-  inventory_id Int               @unique
+  inventory_id Int
 }
 
 model Payment {

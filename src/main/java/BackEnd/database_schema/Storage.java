@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 
 import BackEnd.CommonTask;
@@ -74,6 +75,22 @@ public class Storage {
           "INSERT INTO `Storage` (`name`,`address`,`capacity`,`category`,`inventory_id`) VALUES ('main','main',10000000,'grocery',1)");
       st.execute();
       return find_storage("main");
+
+    } catch (SQLException ex) {
+      throw new RuntimeException(ex);
+    }
+  }
+  public static ArrayList<Storage> get_all_storage() {
+    try {
+      Connection source = db.makeConnections();
+      PreparedStatement st = source.prepareStatement(
+              "SELECT * FROM `Storage`");
+      ResultSet rs=st.executeQuery();
+      ArrayList<Storage>list=new ArrayList<Storage>();
+      while (rs.next()){
+        list.add(new Storage(rs));
+      }
+      return list;
 
     } catch (SQLException ex) {
       throw new RuntimeException(ex);

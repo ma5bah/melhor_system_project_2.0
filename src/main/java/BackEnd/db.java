@@ -9,6 +9,7 @@ import BackEnd.database_schema.Storage;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class db {
 
@@ -21,6 +22,7 @@ public class db {
 
     private static Employee employee = null;
     private static Inventory inventory = null;
+    public static ArrayList<Storage> storage_list=new ArrayList<Storage>();
     public static Order tmp_order = null;
 
     public static boolean isEmployeeAvailable() {
@@ -87,6 +89,7 @@ public class db {
         inventory = Inventory.create_inventory();
         tmp_order=new Order();
         Storage.create_storage();
+        storage_list=Storage.get_all_storage();
     }
 
     public static Connection makeConnections() {

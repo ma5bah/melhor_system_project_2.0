@@ -1,9 +1,6 @@
 package BackEnd.database_schema;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
@@ -47,19 +44,26 @@ public class Order {
   // [Nest] 14132 - 01/18/2023, 11:01:11 PM LOG [QUERY] COMMIT
   // [Nest] 14132 - 01/18/2023, 11:01:11 PM DEBUG [PARAM] []
 
-  public static boolean create_order(
+  public static long create_order(
       String type,
       String coupen) {
     try {
       Connection source = db.makeConnections();
       PreparedStatement st = source.prepareStatement(
-          "INSERT INTO `Order` (`type`,`category`,`quantity`,`price`,`need_space`,`expiry_date`,`storage_id`) VALUES (?,?,?,?,?,?,?)");
-
-      return st.execute();
+          "INSERT INTO `Order` (`type`,`coupen`,`status`,`inventory_id`) VALUES (?,?,?,?)");
+      st.setString(1,type);
+      st.setString(2,coupen);
+      st.setString(3,"pending");
+      st.setLong(4,db.getInventory().getId());
+      st.execute();
+      ResultSet rs= source.prepareStatement("SELECT LAST_INSERT_ID() as id").executeQuery();
+      while(rs.next()){
+        return Long.valueOf(rs.getString("id"));
+      }
     } catch (SQLException ex) {
       CommonTask.log(Level.SEVERE, ex, ex.getMessage());
     }
-    return false;
+    return -1;
   }
 
   public static Order get_order(Long _id) {

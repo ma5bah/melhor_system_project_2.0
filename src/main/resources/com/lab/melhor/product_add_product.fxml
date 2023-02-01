@@ -34,7 +34,6 @@
       <Spinner fx:id="product_quantity" editable="true" layoutX="151.0" layoutY="386.0" prefHeight="37.0" prefWidth="119.0" />
       <Spinner fx:id="product_needed_space" layoutX="151.0" layoutY="291.0" prefHeight="37.0" prefWidth="119.0" />
       <DatePicker fx:id="product_expiry_date" layoutX="151.0" layoutY="338.0" prefHeight="37.0" prefWidth="119.0" />
-      <Spinner fx:id="product_storage_id" editable="true" layoutX="151.0" layoutY="433.0" prefHeight="37.0" prefWidth="119.0" />
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="244.0" prefHeight="37.0" prefWidth="119.0" text="Price" textFill="WHITE">
          <font>
             <Font name="Cambria" size="18.0" />
@@ -61,5 +60,6 @@
          </font>
       </Label>
       <Spinner fx:id="product_price" layoutX="151.0" layoutY="244.0" prefHeight="37.0" prefWidth="119.0" />
+      <ComboBox fx:id="product_storage_name" layoutX="151.0" layoutY="433.0" prefHeight="37.0" prefWidth="119.0" promptText="Category" />
    </children>
 </AnchorPane>

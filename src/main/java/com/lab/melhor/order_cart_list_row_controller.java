@@ -26,7 +26,7 @@ import javafx.scene.layout.Pane;
 public class order_cart_list_row_controller implements Initializable {
 
     @FXML
-    private Label item_name;
+    private Label item_id;
     @FXML
     HBox item_box;
     @FXML
@@ -35,8 +35,8 @@ public class order_cart_list_row_controller implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // System.out.print("From Item : ");
-        item_name.setText(resources.getString("name"));
-        quantity.setText(resources.getString("quantity"));
+        item_id.setText(resources.getString("product_id"));
+        quantity.setText(resources.getString("product_quantity"));
         // System.out.println(resources.getString("name"));
     }
 

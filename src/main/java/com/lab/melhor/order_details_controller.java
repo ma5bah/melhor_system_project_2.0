@@ -2,10 +2,12 @@ package com.lab.melhor;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import BackEnd.database_schema.ProductAndOrder;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -34,7 +36,8 @@ public class order_details_controller implements Initializable {
     private VBox pnItems;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Node[] nodes = new Node[10];
+        ArrayList<ProductAndOrder>list=ProductAndOrder.get_ordered_product(Long.parseLong(resources.getString("order_id")));
+        Node[] nodes = new Node[list.size()];
         for (int i = 0; i < nodes.length; i++) {
             try {
 
@@ -43,8 +46,14 @@ public class order_details_controller implements Initializable {
                     
                     @Override
                     protected Object handleGetObject(String key) {
-                        if(key=="name"){
-                            return "masbah"+Integer.toString(j);
+                        if(key=="order_id"){
+                            return String.valueOf( list.get(j).getOrderId());
+                        }
+                        if(key=="product_id"){
+                            return String.valueOf(list.get(j).getProductId());
+                        }
+                        if(key=="product_quantity"){
+                            return String.valueOf(list.get(j).getProductQuantity());
                         }
                         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
                     }
