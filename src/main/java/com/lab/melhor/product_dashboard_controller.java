@@ -18,6 +18,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -26,6 +27,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.ResourceBundle;
+
 import com.jfoenix.controls.JFXButton;
 
 import BackEnd.database_schema.Product;
@@ -41,7 +43,13 @@ public class product_dashboard_controller implements Initializable {
     private ComboBox<String> product_category;
     @FXML
     private TextField search_product_field;
-    // TextField search_filter_field;
+    @FXML
+    private TextField min_price;
+    @FXML
+    private TextField max_price;
+    @FXML
+    private Label total_product;    // TextField search_filter_field;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -51,13 +59,14 @@ public class product_dashboard_controller implements Initializable {
         product_category.setItems(category);
 
         ArrayList<Product> list = Product.get_all_product();
+        total_product.setText(String.valueOf(list.size()));
         show_product(list);
     }
 
-    void show_product(ArrayList<Product> list){
-        // if(list==null){
-        //     return;
-        // }
+    void show_product(ArrayList<Product> list) {
+        if (list == null) {
+            return;
+        }
         Node[] nodes = new Node[list.size()];
         for (int i = 0; i < list.size(); i++) {
             try {
@@ -75,13 +84,13 @@ public class product_dashboard_controller implements Initializable {
                             return list.get(j).getCategory();
                         }
                         if (key == "item_price") {
-                            return String.valueOf( list.get(j).getPrice());
+                            return String.valueOf(list.get(j).getPrice());
                         }
                         if (key == "item_expiry_date") {
                             return new Date(list.get(j).getExpiryDate().getTime()).toString();
                         }
                         if (key == "item_quantity") {
-                            
+
                             return String.valueOf(list.get(j).getQuantity());
                         }
                         throw new UnsupportedOperationException("Not enumeration supported yet.");
@@ -106,7 +115,8 @@ public class product_dashboard_controller implements Initializable {
             }
         }
     }
-    void remove_all_product(){
+
+    void remove_all_product() {
         ArrayList<Node> removal_list = new ArrayList<Node>();
         for (int i = 0; i < scrollPnItems.getChildren().size(); i++) {
             removal_list.add(scrollPnItems.getChildren().get(i));
@@ -117,6 +127,24 @@ public class product_dashboard_controller implements Initializable {
         scrollPnItems.getChildren().removeAll(removal_list);
         // System.out.println(scrollPnItems.getChildren().removeAll(removal_list)?"Removed all product":"Failed");
     }
+
+    @FXML
+    public void price_filter(KeyEvent evt) {
+        if (evt.getCode() == KeyCode.ENTER) {
+            long min = 0;
+            long max = 2099999999;
+            System.out.println(((TextField) evt.getSource()).getText());
+            if (min_price.getText().matches("[0-9]+")) {
+                min = Long.parseLong(min_price.getText());
+            }
+            if (max_price.getText().matches("[0-9]+")) {
+                max = Long.parseLong(max_price.getText());
+            }
+            remove_all_product();
+            show_product(Product.get_all_product_by_price(min, max));
+        }
+    }
+
     @FXML
     public void search_by_category_on_mouse_exited() {
         // String searched_text = search_filter_field.getText();
@@ -134,12 +162,12 @@ public class product_dashboard_controller implements Initializable {
     }
 
     @FXML
-    public void filter_product(KeyEvent evt){
+    public void filter_product(KeyEvent evt) {
         // System.out.println(evt);
         // if(evt instanceof event)
         // System.out.println(evt.getCode()==KeyCode.ENTER);
-        if(evt.getCode()==KeyCode.ENTER){
-            if(search_product_field.getText()!=""){
+        if (evt.getCode() == KeyCode.ENTER) {
+            if (search_product_field.getText() != "") {
                 remove_all_product();
                 show_product(Product.get_all_product_by_name(search_product_field.getText()));
                 // System.out.println(search_product_field.getText());
@@ -148,12 +176,13 @@ public class product_dashboard_controller implements Initializable {
         // System.out.println(evt.get);
         // if(search_product_field.getCharacters()
     }
-    
+
     @FXML
-    public void filter_category(){
+    public void filter_category() {
         remove_all_product();
         show_product(Product.get_all_product_by_category(product_category.getValue()));
     }
+
     @FXML
     private void open_add_product_window() {
         // App.slide_from_right_side("product_details");

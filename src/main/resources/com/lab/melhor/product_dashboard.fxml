@@ -31,7 +31,7 @@
                   </Label>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Label prefHeight="38.0" prefWidth="295.0" style="-fx-alignment: center;" text="22000" textAlignment="CENTER" textFill="#2a73ff" textOverrun="WORD_ELLIPSIS">
+                        <Label fx:id="total_product" prefHeight="38.0" prefWidth="295.0" style="-fx-alignment: center;" text="22000" textAlignment="CENTER" textFill="#2a73ff" textOverrun="WORD_ELLIPSIS">
                            <font>
                               <Font name="System Bold" size="26.0" />
                            </font>
@@ -60,7 +60,7 @@
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="99.0" text="Product Name" textFill="#e7e5e5" />
                </children>
             </Pane>
-            <Pane fx:id="product_category_pane" layoutX="186.0" layoutY="180.0"  prefHeight="27.0" prefWidth="123.0">
+            <Pane fx:id="product_category_pane" layoutX="186.0" layoutY="180.0" prefHeight="27.0" prefWidth="123.0">
                <children>
                   <ComboBox fx:id="product_category" onHiding="#filter_category" prefHeight="25.0" prefWidth="122.0" promptText="Category" />
                </children>
@@ -70,16 +70,15 @@
                   <Label text="Expiry Date" textFill="#e7e5e5" />
                </children>
             </Pane>
-            <Pane layoutX="509.0" layoutY="180.0">
-               <children>
-                  <Label text="Price" textFill="#e7e5e5" />
-               </children>
-            </Pane>
+            <Pane layoutX="509.0" layoutY="180.0" />
             <Pane layoutX="647.0" layoutY="180.0">
                <children>
                   <Label text="Quantity" textFill="#e7e5e5" />
                </children>
             </Pane>
+            <TextField fx:id="min_price" alignment="CENTER" layoutX="476.0" layoutY="175.0" onKeyReleased="#price_filter" prefHeight="28.0" prefWidth="47.0" promptText="Min" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em; -fx-text-fill: #ffffff;" />
+            <TextField fx:id="max_price" alignment="CENTER" layoutX="523.0" layoutY="175.0" onKeyReleased="#price_filter" prefHeight="28.0" prefWidth="47.0" promptText="Max" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em; -fx-text-fill: #ffffff;" />
+            <Label layoutX="509.0" layoutY="158.0" text="Price" textFill="#e7e5e5" />
          </children>
       </Pane>
    </children>

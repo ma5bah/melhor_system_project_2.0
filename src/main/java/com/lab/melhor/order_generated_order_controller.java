@@ -55,10 +55,10 @@ public class order_generated_order_controller implements Initializable {
                     
                     @Override
                     protected Object handleGetObject(String key) {
-                        if(key=="name"){
+                        if(key=="product_id"){
                             return tmp_product.getName();
                         }
-                        if(key=="quantity"){
+                        if(key=="product_quantity"){
                             return product_list.get(j).getValue().toString();
                         }
                         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

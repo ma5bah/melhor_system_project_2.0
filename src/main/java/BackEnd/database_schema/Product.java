@@ -66,11 +66,12 @@ public class Product {
     }
     return false;
   }
+
   public static int count_product() {
     try {
       Connection source = db.makeConnections();
       PreparedStatement st = source.prepareStatement(
-              "SELECT count(*) as count FROM `Product`");
+          "SELECT count(*) as count FROM `Product`");
       ResultSet rs = st.executeQuery();
       rs.next();
       return rs.getInt("count");
@@ -80,6 +81,7 @@ public class Product {
     }
     return 0;
   }
+
   public static ArrayList<Product> get_all_product() {
     try {
       Connection source = db.makeConnections();
@@ -116,11 +118,12 @@ public class Product {
     }
     return null;
   }
+
   public static ArrayList<Product> get_all_product_by_name(String _name) {
     try {
       Connection source = db.makeConnections();
       PreparedStatement st = source.prepareStatement(
-          "SELECT * FROM `Product` WHERE `name` LIKE '%"+_name+"%';");
+          "SELECT * FROM `Product` WHERE `name` LIKE '%" + _name + "%';");
       // st.setString(1, _name);
       // System.out.println()
       ResultSet rs = st.executeQuery();
@@ -137,6 +140,27 @@ public class Product {
     }
     return null;
   }
+
+  public static ArrayList<Product> get_all_product_by_price(long min, long max) {
+    try {
+      Connection source = db.makeConnections();
+      PreparedStatement st = source.prepareStatement(
+          "SELECT * FROM `Product` WHERE ? <= `price` AND `price` <= ?;");
+      st.setLong(1, min);
+      st.setLong(2, max);
+
+      ResultSet rs = st.executeQuery();
+      ArrayList<Product> list = new ArrayList<Product>();
+      while (rs.next()) {
+        list.add(new Product(rs));
+      }
+      return list;
+    } catch (SQLException ex) {
+      CommonTask.log(Level.SEVERE, ex, ex.getMessage());
+    }
+    return null;
+  }
+
   public static Product get_product_by_id(Long _id) {
     try {
       Connection source = db.makeConnections();
@@ -147,10 +171,9 @@ public class Product {
       ResultSet rs = st.executeQuery();
       // System.out.println(rs.getStatement());
 
-
       while (rs.next()) {
         // System.out.println(rs.getString("name"));
-       return new Product(rs);
+        return new Product(rs);
 
       }
     } catch (SQLException ex) {
@@ -158,7 +181,7 @@ public class Product {
     }
     return null;
   }
-  
+
   public static ArrayList<String> get_category() {
     ArrayList<String> list = new ArrayList<String>();
     list.add("main");
